@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
+import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
 
 const pricingPlans = [
     {
@@ -53,29 +54,47 @@ const pricingPlans = [
 
 export const PricingSection: React.FC = () => {
     return (
-        <section id="pricing" className="py-20 bg-black">
+        <section id="pricing" className="py-16 sm:py-20 bg-white dark:bg-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center mb-12 sm:mb-16"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Simple Pricing
-                    </h2>
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Transparent Pricing Plans
-                    </h2>
-                    <p className="text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed">
-                        We offer adaptable pricing solutions for businesses of any size.
-                    </p>
+                    <AutomatixHeroText
+                        text="Simple Pricing"
+                        className="text-gray-900 dark:text-white"
+                        delay={1.0}
+                        stagger={0.03}
+                        duration={0.8}
+                        blurIntensity={6}
+                        effect="automatix-blur"
+                    />
+                    <AutomatixHeroText
+                        text="Transparent Pricing Plans"
+                        className="text-gray-900 dark:text-white"
+                        delay={1.2}
+                        stagger={0.03}
+                        duration={0.8}
+                        blurIntensity={6}
+                        effect="automatix-blur"
+                    />
+                    <AutomatixSubtitleText
+                        text="We offer adaptable pricing solutions for businesses of any size."
+                        className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
+                        delay={1.8}
+                        stagger={0.04}
+                        duration={0.7}
+                        blurIntensity={5}
+                        effect="word-reveal"
+                    />
                 </motion.div>
 
                 {/* Pricing Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
                     {pricingPlans.map((plan, index) => (
                         <motion.div
                             key={plan.name}
@@ -83,11 +102,11 @@ export const PricingSection: React.FC = () => {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: index * 0.1 }}
+                            transition={{ duration: 0.8, delay: 2.2 + index * 0.2 }}
                         >
                             {plan.popular && (
                                 <motion.div
-                                    className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-secondary-600 text-white px-6 py-2 rounded-full text-sm font-semibold"
+                                    className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 bg-secondary-600 text-white px-4 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
                                     initial={{ scale: 0 }}
                                     whileInView={{ scale: 1 }}
                                     viewport={{ once: true }}
@@ -98,9 +117,9 @@ export const PricingSection: React.FC = () => {
                             )}
 
                             <motion.div
-                                className={`bg-neutral-900 rounded-2xl p-8 border-2 ${plan.popular
+                                className={`bg-gray-50 dark:bg-neutral-900 rounded-2xl p-6 sm:p-8 border-2 ${plan.popular
                                     ? 'border-secondary-600'
-                                    : 'border-neutral-800 hover:border-neutral-700'
+                                    : 'border-gray-200 dark:border-neutral-800 hover:border-gray-300 dark:hover:border-neutral-700'
                                     } transition-all duration-300`}
                                 whileHover={{
                                     y: -8,
@@ -108,38 +127,38 @@ export const PricingSection: React.FC = () => {
                                 }}
                             >
                                 {/* Header */}
-                                <div className="text-center mb-8">
-                                    <h3 className="text-2xl font-bold text-white mb-2">
+                                <div className="text-center mb-6 sm:mb-8">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                                         {plan.name}
                                     </h3>
-                                    <p className="text-neutral-400 mb-6">
+                                    <p className="text-gray-600 dark:text-neutral-400 text-sm sm:text-base mb-4 sm:mb-6">
                                         {plan.description}
                                     </p>
-                                    <div className="mb-6">
-                                        <span className="text-4xl font-bold text-white">
+                                    <div className="mb-4 sm:mb-6">
+                                        <span className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
                                             ${plan.price}
                                         </span>
-                                        <span className="text-neutral-400">/{plan.period}</span>
+                                        <span className="text-gray-600 dark:text-neutral-400 text-sm sm:text-base">/{plan.period}</span>
                                     </div>
                                 </div>
 
                                 {/* Features */}
-                                <ul className="space-y-4 mb-8">
+                                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                                     {plan.features.map((feature, featureIndex) => (
                                         <motion.li
                                             key={featureIndex}
-                                            className="flex items-center text-neutral-400"
+                                            className="flex items-center text-gray-600 dark:text-neutral-400 text-sm sm:text-base"
                                             initial={{ opacity: 0, x: -10 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: featureIndex * 0.1 }}
                                         >
                                             <motion.div
-                                                className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0"
+                                                className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0"
                                                 whileHover={{ scale: 1.2 }}
                                                 transition={{ type: "spring", stiffness: 400 }}
                                             >
-                                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <svg className="w-2 h-2 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                                 </svg>
                                             </motion.div>
@@ -170,16 +189,16 @@ export const PricingSection: React.FC = () => {
 
                 {/* Additional Info */}
                 <motion.div
-                    className="text-center mt-16"
+                    className="text-center mt-12 sm:mt-16"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
+                    transition={{ duration: 0.8, delay: 3.2 }}
                 >
-                    <p className="text-neutral-400 mb-4">
+                    <p className="text-gray-600 dark:text-neutral-400 mb-3 sm:mb-4 text-sm sm:text-base px-4 sm:px-0">
                         All plans include a 14-day free trial. No credit card required.
                     </p>
-                    <p className="text-sm text-neutral-500">
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-neutral-500 px-4 sm:px-0">
                         Need a custom plan? <a href="#contact" className="text-primary-400 hover:text-primary-300 font-medium">Contact us</a> for enterprise solutions.
                     </p>
                 </motion.div>

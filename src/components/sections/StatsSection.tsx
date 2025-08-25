@@ -57,7 +57,7 @@ const AnimatedCounter: React.FC<{ value: number; suffix: string }> = ({ value, s
     }, [isInView, value]);
 
     return (
-        <span ref={ref} className="text-4xl md:text-5xl font-bold text-white">
+        <span ref={ref} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
             {count.toLocaleString()}{suffix}
         </span>
     );
@@ -69,8 +69,8 @@ export const StatsSection: React.FC = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.1,
+                staggerChildren: 0.3,
+                delayChildren: 0.8,
             },
         },
     };
@@ -84,14 +84,15 @@ export const StatsSection: React.FC = () => {
     };
 
     return (
-        <section className="py-20 bg-black">
+        <section id="stats" className="py-16 sm:py-20 bg-white dark:bg-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
-                    className="grid grid-cols-2 md:grid-cols-4 gap-8"
+                    className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
                 >
                     {stats.map((stat, index) => (
                         <motion.div
@@ -101,21 +102,21 @@ export const StatsSection: React.FC = () => {
                             className="text-center group"
                         >
                             <motion.div
-                                className="w-16 h-16 bg-neutral-900 border border-neutral-800 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:border-neutral-700 transition-all duration-300"
+                                className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto group-hover:border-gray-300 dark:group-hover:border-neutral-700 transition-all duration-300"
                                 whileHover={{
                                     scale: 1.1,
                                     rotate: 5,
                                     transition: { type: "spring", stiffness: 400 }
                                 }}
                             >
-                                <stat.icon className="w-8 h-8 text-white" />
+                                <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-700 dark:text-white" />
                             </motion.div>
 
                             <div className="mb-2">
                                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                             </div>
 
-                            <p className="text-neutral-400 font-medium">
+                            <p className="text-xs sm:text-sm text-gray-600 dark:text-neutral-400 font-medium px-2">
                                 {stat.label}
                             </p>
                         </motion.div>
@@ -124,13 +125,13 @@ export const StatsSection: React.FC = () => {
 
                 {/* Additional Info */}
                 <motion.div
-                    className="text-center mt-16"
+                    className="text-center mt-12 sm:mt-16"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
+                    transition={{ duration: 0.8, delay: 2.4 }}
                 >
-                    <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+                    <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto px-4 sm:px-0">
                         Trusted by businesses worldwide for social media management, webinar solutions, AI chatbots, and digital marketing automation.
                     </p>
                 </motion.div>

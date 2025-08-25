@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useUIStore } from '../../store/uiStore';
 import { ThemeToggle } from './ThemeToggle';
 import { useOptimizedScroll } from '../../utils/performance';
+import { scrollToElement } from '../../utils/scrollUtils';
 import { ArrowRight, Menu, X } from 'lucide-react';
 
 const Navigation = memo(() => {
@@ -19,26 +20,38 @@ const Navigation = memo(() => {
         { id: 'why-us', label: 'Why Us' },
         { id: 'mission', label: 'Mission' },
         { id: 'services', label: 'Services' },
+        { id: 'stats', label: 'Stats' },
         { id: 'testimonials', label: 'Testimonials' },
         { id: 'team', label: 'Team' }
     ];
 
     const handleNavClick = (sectionId: string) => {
         setActiveSection(sectionId);
-        toggleMenu();
+        scrollToElement(sectionId);
 
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
+        // Ensure the active section is set after a short delay to account for scroll animation
+        setTimeout(() => {
+            setActiveSection(sectionId);
+        }, 100);
+    };
+
+    const handleMobileNavClick = (sectionId: string) => {
+        setActiveSection(sectionId);
+        toggleMenu(); // Only close menu for mobile
+        scrollToElement(sectionId);
+
+        // Ensure the active section is set after a short delay to account for scroll animation
+        setTimeout(() => {
+            setActiveSection(sectionId);
+        }, 100);
     };
 
     return (
         <>
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? 'bg-black/95 backdrop-blur-md shadow-lg'
-                : 'bg-black/80 backdrop-blur-md'
-                } border-b border-neutral-800`}>
+                ? 'bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-lg'
+                : 'bg-white/80 dark:bg-black/80 backdrop-blur-md'
+                } border-b border-gray-200 dark:border-neutral-800`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
@@ -46,10 +59,10 @@ const Navigation = memo(() => {
                             className="flex items-center gap-2 text-xl font-bold cursor-pointer"
                             whileHover={{ scale: 1.05 }}
                             transition={{ type: "spring", stiffness: 400 }}
-                            onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => scrollToElement('home')}
                         >
                             <span className="text-secondary-400">OG</span>
-                            <span className="text-white">Impact</span>
+                            <span className="text-gray-900 dark:text-white">Impact</span>
                             <span className="text-primary-400 text-lg">+</span>
                         </motion.div>
 
@@ -61,7 +74,7 @@ const Navigation = memo(() => {
                                     onClick={() => handleNavClick(item.id)}
                                     className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${activeSection === item.id
                                         ? 'text-primary-400'
-                                        : 'text-white hover:text-primary-400'
+                                        : 'text-gray-700 dark:text-white hover:text-primary-400'
                                         }`}
                                     whileHover={{ y: -2 }}
                                     whileTap={{ scale: 0.95 }}
@@ -82,8 +95,8 @@ const Navigation = memo(() => {
                         <div className="flex items-center space-x-4">
                             {/* CTA Button */}
                             <motion.button
-                                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="hidden md:flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-neutral-200 transition-colors duration-200"
+                                onClick={() => scrollToElement('contact')}
+                                className="hidden md:flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors duration-200"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -96,13 +109,13 @@ const Navigation = memo(() => {
                             {/* Mobile Menu Button */}
                             <motion.button
                                 onClick={toggleMenu}
-                                className="md:hidden p-2 rounded-lg hover:bg-neutral-800 transition-colors duration-200"
+                                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors duration-200"
                                 whileTap={{ scale: 0.95 }}
                             >
                                 {isMenuOpen ? (
-                                    <X className="w-6 h-6 text-white" />
+                                    <X className="w-6 h-6 text-gray-900 dark:text-white" />
                                 ) : (
-                                    <Menu className="w-6 h-6 text-white" />
+                                    <Menu className="w-6 h-6 text-gray-900 dark:text-white" />
                                 )}
                             </motion.button>
                         </div>
@@ -114,7 +127,7 @@ const Navigation = memo(() => {
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
-                        className="md:hidden bg-black border-t border-neutral-800"
+                        className="md:hidden bg-white dark:bg-black border-t border-gray-200 dark:border-neutral-800"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
@@ -124,10 +137,10 @@ const Navigation = memo(() => {
                             {navItems.map((item) => (
                                 <motion.button
                                     key={item.id}
-                                    onClick={() => handleNavClick(item.id)}
+                                    onClick={() => handleMobileNavClick(item.id)}
                                     className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${activeSection === item.id
-                                        ? 'bg-primary-900/50 text-primary-400'
-                                        : 'text-white hover:bg-neutral-800'
+                                        ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400'
+                                        : 'text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-neutral-800'
                                         }`}
                                     whileHover={{ x: 8 }}
                                     whileTap={{ scale: 0.98 }}
@@ -136,8 +149,11 @@ const Navigation = memo(() => {
                                 </motion.button>
                             ))}
                             <motion.button
-                                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium bg-white text-black hover:bg-neutral-200 transition-colors duration-200 flex items-center gap-2"
+                                onClick={() => {
+                                    scrollToElement('contact');
+                                    toggleMenu();
+                                }}
+                                className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors duration-200 flex items-center gap-2"
                                 whileHover={{ x: 8 }}
                                 whileTap={{ scale: 0.98 }}
                             >

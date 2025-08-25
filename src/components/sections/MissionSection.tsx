@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { scrollToElement } from '../../utils/scrollUtils';
+import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
 
 export const MissionSection = () => {
     const [ref, inView] = useInView({
@@ -12,7 +14,8 @@ export const MissionSection = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.3
+                staggerChildren: 0.4,
+                delayChildren: 0.8
             }
         }
     };
@@ -23,7 +26,7 @@ export const MissionSection = () => {
     };
 
     return (
-        <section id="mission" className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <section id="mission" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     ref={ref}
@@ -35,41 +38,63 @@ export const MissionSection = () => {
                     {/* Our Mission badge - identical to WhyUsSection */}
                     <motion.div
                         variants={itemVariants}
-                        className="text-center mb-8"
+                        className="text-center mb-6 sm:mb-8"
                     >
-                        <span className="inline-block px-4 py-2 bg-neutral-800 text-white text-sm font-medium rounded-full border border-neutral-700">
+                        <span className="inline-block px-3 sm:px-4 py-2 bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white text-xs sm:text-sm font-medium rounded-full border border-gray-200 dark:border-neutral-700">
                             Our Mission
                         </span>
                     </motion.div>
 
                     {/* Main headline */}
-                    <motion.div variants={itemVariants} className="mb-12">
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                            <span className="text-white">We Automate Your Business</span>
-                        </h2>
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                            <span className="text-white">To </span>
-                            <span className="text-orange-500">Grow Faster</span>
-                            <span className="text-white"> While You Focus</span>
-                        </h2>
-                        <h2 className="text-4xl md:text-6xl font-bold leading-tight">
-                            <span className="text-orange-500">On What You Do Best</span>
-                            <span className="text-white">.</span>
-                        </h2>
+                    <motion.div variants={itemVariants} className="mb-8 sm:mb-12">
+                        <AutomatixHeroText
+                            text="We Automate Your Business"
+                            className="text-gray-900 dark:text-white"
+                            delay={0.2}
+                            stagger={0.03}
+                            duration={0.8}
+                            blurIntensity={6}
+                            effect="automatix-blur"
+                        />
+                        <AutomatixHeroText
+                            text="To Grow Faster While You Focus"
+                            className="text-gray-900 dark:text-white"
+                            delay={0.4}
+                            stagger={0.03}
+                            duration={0.8}
+                            blurIntensity={6}
+                            effect="automatix-blur"
+                        />
+                        <AutomatixHeroText
+                            text="On What You Do Best."
+                            className="text-gray-900 dark:text-white"
+                            delay={0.6}
+                            stagger={0.03}
+                            duration={0.8}
+                            blurIntensity={6}
+                            effect="automatix-blur"
+                        />
                     </motion.div>
 
                     {/* Description paragraph */}
-                    <motion.div variants={itemVariants} className="mb-16">
-                        <p className="text-xl text-neutral-400 max-w-4xl mx-auto leading-relaxed">
-                            We transform businesses by automating everything from social media management to AI chatbots, webinar systems, and lead generation.
-                        </p>
+                    <motion.div variants={itemVariants} className="mb-12 sm:mb-16">
+                        <AutomatixSubtitleText
+                            text="We transform businesses by automating everything from social media management to AI chatbots, webinar systems, and lead generation."
+                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-3xl sm:max-w-4xl mx-auto leading-relaxed px-4 sm:px-0"
+                            delay={1.6}
+                            stagger={0.04}
+                            duration={0.7}
+                            blurIntensity={5}
+                            effect="word-reveal"
+                        />
                     </motion.div>
 
                     {/* Book A Call link */}
                     <motion.div
                         variants={itemVariants}
-                        className="inline-flex items-center gap-2 text-orange-500 text-lg font-medium cursor-pointer hover:text-orange-400 transition-colors"
-                        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="inline-flex items-center gap-2 text-orange-500 text-base sm:text-lg font-medium cursor-pointer hover:text-orange-400 transition-colors"
+                        onClick={() => scrollToElement('contact')}
+                        transition={{ delay: 2.0, duration: 0.8 }}
                     >
                         <span>Book A Call</span>
                         <svg

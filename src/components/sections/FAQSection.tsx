@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState } from 'react';
 import { Button } from '../ui/Button';
+import { scrollToElement } from '../../utils/scrollUtils';
+import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
 
 const faqs = [
     {
@@ -34,7 +36,8 @@ export const FAQSection = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.15,
+                delayChildren: 0.8
             }
         }
     };
@@ -52,24 +55,37 @@ export const FAQSection = () => {
     };
 
     return (
-        <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
+        <section id="faq" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     ref={ref}
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mb-16"
+                    className="text-center mb-12 sm:mb-16"
+                    transition={{ delay: 0.8, duration: 0.8 }}
                 >
-                    <motion.div variants={itemVariants} className="mb-6">
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                            Need to Know
-                        </h2>
+                    <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
+                        <AutomatixHeroText
+                            text="Need to Know"
+                            className="text-gray-900 dark:text-white"
+                            delay={1.0}
+                            stagger={0.03}
+                            duration={0.8}
+                            blurIntensity={6}
+                            effect="automatix-blur"
+                        />
                     </motion.div>
-                    <motion.div variants={itemVariants} className="mb-4">
-                        <h3 className="text-2xl font-semibold text-white">
-                            Frequently Asked Questions
-                        </h3>
+                    <motion.div variants={itemVariants} className="mb-2 sm:mb-4">
+                        <AutomatixSubtitleText
+                            text="Frequently Asked Questions"
+                            className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white"
+                            delay={1.4}
+                            stagger={0.04}
+                            duration={0.7}
+                            blurIntensity={5}
+                            effect="word-reveal"
+                        />
                     </motion.div>
                 </motion.div>
 
@@ -77,24 +93,25 @@ export const FAQSection = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="space-y-4"
+                    className="space-y-3 sm:space-y-4"
+                    transition={{ delay: 1.6, duration: 0.8 }}
                 >
                     {faqs.map((faq, index) => (
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            className="border border-neutral-800 rounded-2xl overflow-hidden"
+                            className="border border-gray-200 dark:border-neutral-800 rounded-2xl overflow-hidden"
                         >
                             <button
                                 onClick={() => toggleFAQ(index)}
-                                className="w-full px-6 py-6 text-left bg-neutral-900 hover:bg-neutral-800 transition-colors duration-300 flex items-center justify-between"
+                                className="w-full px-4 sm:px-6 py-4 sm:py-6 text-left bg-gray-50 dark:bg-neutral-900 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors duration-300 flex items-center justify-between"
                             >
-                                <h4 className="text-lg font-semibold text-white pr-4">
+                                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white pr-3 sm:pr-4">
                                     {faq.question}
                                 </h4>
                                 <div className="flex-shrink-0">
                                     <svg
-                                        className={`w-6 h-6 text-neutral-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}
+                                        className={`w-5 h-5 sm:w-6 sm:h-6 text-gray-600 dark:text-neutral-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -116,8 +133,8 @@ export const FAQSection = () => {
                                 }}
                                 className="overflow-hidden"
                             >
-                                <div className="px-6 pb-6 bg-neutral-900/50">
-                                    <p className="text-neutral-400 leading-relaxed">
+                                <div className="px-4 sm:px-6 pb-4 sm:pb-6 bg-gray-50/50 dark:bg-neutral-900/50">
+                                    <p className="text-sm sm:text-base text-gray-600 dark:text-neutral-400 leading-relaxed">
                                         {faq.answer}
                                     </p>
                                 </div>
@@ -130,15 +147,17 @@ export const FAQSection = () => {
                     variants={itemVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mt-16"
+                    className="text-center mt-12 sm:mt-16"
+                    transition={{ delay: 2.8, duration: 0.8 }}
                 >
-                    <p className="text-neutral-400 mb-8">
+                    <p className="text-gray-600 dark:text-neutral-400 mb-6 sm:mb-8 text-sm sm:text-base px-4 sm:px-0">
                         Still have questions? We're here to help!
                     </p>
                     <Button
                         variant="primary"
                         size="lg"
-                        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                        onClick={() => scrollToElement('contact')}
+                        className="w-full sm:w-auto"
                     >
                         Contact Us
                     </Button>

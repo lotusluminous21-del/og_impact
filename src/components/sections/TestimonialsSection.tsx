@@ -13,6 +13,7 @@ import {
     Star,
     Zap as ZapIcon
 } from 'lucide-react';
+import { AutomatixHeroText } from '../ui/AutomatixTextReveal';
 
 const testimonials = [
     {
@@ -68,7 +69,8 @@ export const TestimonialsSection: React.FC = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2
+                staggerChildren: 0.3,
+                delayChildren: 0.8
             }
         }
     };
@@ -88,16 +90,17 @@ export const TestimonialsSection: React.FC = () => {
     const otherTestimonials = testimonials.slice(1);
 
     return (
-        <section id="testimonials" className="py-20 bg-black relative overflow-hidden">
+        <section id="testimonials" className="py-16 sm:py-20 bg-white dark:bg-black relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Testimonials Badge - Identical to WhyUsSection */}
                 <motion.div
                     variants={itemVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mb-8"
+                    className="text-center mb-6 sm:mb-8"
+                    transition={{ delay: 0.6, duration: 0.8 }}
                 >
-                    <span className="inline-block px-4 py-2 bg-neutral-800 text-white text-sm font-medium rounded-full border border-neutral-700">
+                    <span className="inline-block px-3 sm:px-4 py-2 bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white text-xs sm:text-sm font-medium rounded-full border border-gray-200 dark:border-neutral-700">
                         What Our Users Say
                     </span>
                 </motion.div>
@@ -108,12 +111,19 @@ export const TestimonialsSection: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mb-16"
+                    className="text-center mb-12 sm:mb-16"
+                    transition={{ delay: 0.8, duration: 0.8 }}
                 >
-                    <motion.div variants={itemVariants} className="mb-6">
-                        <h2 className="text-4xl md:text-6xl font-bold text-white">
-                            Trusted By Businesses Like Yours
-                        </h2>
+                    <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
+                        <AutomatixHeroText
+                            text="Trusted By Businesses Like Yours"
+                            className="text-gray-900 dark:text-white"
+                            delay={1.0}
+                            stagger={0.03}
+                            duration={0.8}
+                            blurIntensity={6}
+                            effect="automatix-blur"
+                        />
                     </motion.div>
                 </motion.div>
 
@@ -122,16 +132,17 @@ export const TestimonialsSection: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="mb-20"
+                    className="mb-16 sm:mb-20"
+                    transition={{ delay: 1.4, duration: 0.8 }}
                 >
                     <motion.div
                         variants={itemVariants}
-                        className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16"
+                        className="flex flex-col lg:flex-row items-start gap-8 sm:gap-12 lg:gap-16"
                     >
                         {/* Avatar Section - Left side */}
                         <div className="flex justify-center lg:justify-start lg:w-2/5">
                             <div className="relative">
-                                <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden mb-8 border-2 border-neutral-700 shadow-2xl">
+                                <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden mb-6 sm:mb-8 border-2 border-gray-300 dark:border-neutral-700 shadow-2xl">
                                     <img
                                         src={featuredTestimonial.avatar}
                                         alt={`${featuredTestimonial.name} - ${featuredTestimonial.role}`}
@@ -144,42 +155,42 @@ export const TestimonialsSection: React.FC = () => {
                         {/* Content Section - Right side */}
                         <div className="lg:w-3/5">
                             {/* Company Info with Icon */}
-                            <div className="flex items-center gap-4 mb-8">
-                                <featuredTestimonial.icon className="w-8 h-8 text-orange-500" />
-                                <span className="text-white font-semibold text-xl">{featuredTestimonial.company}</span>
+                            <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                                <featuredTestimonial.icon className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
+                                <span className="text-gray-900 dark:text-white font-semibold text-lg sm:text-xl">{featuredTestimonial.company}</span>
                             </div>
 
                             {/* Quote */}
-                            <blockquote className="text-2xl md:text-3xl lg:text-4xl text-white leading-relaxed mb-10 font-medium">
+                            <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-900 dark:text-white leading-relaxed mb-8 sm:mb-10 font-medium">
                                 "{featuredTestimonial.content}"
                             </blockquote>
 
                             {/* Attribution */}
-                            <div className="mb-10">
-                                <h3 className="text-2xl font-bold text-white mb-2">
+                            <div className="mb-8 sm:mb-10">
+                                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                                     {featuredTestimonial.name}
                                 </h3>
-                                <p className="text-neutral-300 text-xl">
+                                <p className="text-gray-700 dark:text-neutral-300 text-lg sm:text-xl">
                                     {featuredTestimonial.role}
                                 </p>
                             </div>
 
                             {/* Stats */}
                             {featuredTestimonial.stats && (
-                                <div className="grid grid-cols-2 gap-12">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
                                     <div>
-                                        <div className="text-5xl md:text-6xl font-bold text-white mb-3">
+                                        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
                                             {featuredTestimonial.stats.salesIncrease}
                                         </div>
-                                        <div className="text-neutral-300 text-lg">
+                                        <div className="text-gray-700 dark:text-neutral-300 text-sm sm:text-lg">
                                             Sales increase in first month.
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="text-5xl md:text-6xl font-bold text-white mb-3">
+                                        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
                                             {featuredTestimonial.stats.resolutionTime}
                                         </div>
-                                        <div className="text-neutral-300 text-lg">
+                                        <div className="text-gray-700 dark:text-neutral-300 text-sm sm:text-lg">
                                             Faster customer resolutions.
                                         </div>
                                     </div>
@@ -194,7 +205,8 @@ export const TestimonialsSection: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+                    transition={{ delay: 2.0, duration: 0.8 }}
                 >
                     {otherTestimonials.map((testimonial, index) => (
                         <motion.div
@@ -204,29 +216,29 @@ export const TestimonialsSection: React.FC = () => {
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
                         >
                             {/* Company Logo and Name */}
-                            <div className="flex items-center gap-4 mb-6">
-                                <testimonial.icon className="w-6 h-6 text-neutral-400" />
-                                <span className="text-white font-semibold text-lg">{testimonial.company}</span>
+                            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                                <testimonial.icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 dark:text-neutral-400" />
+                                <span className="text-gray-900 dark:text-white font-semibold text-base sm:text-lg">{testimonial.company}</span>
                             </div>
 
                             {/* Stars */}
-                            <div className="flex gap-1 mb-6">
+                            <div className="flex gap-1 mb-4 sm:mb-6">
                                 {[...Array(testimonial.rating)].map((_, i) => (
-                                    <Star key={i} className="w-5 h-5 text-orange-500 fill-current" />
+                                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 fill-current" />
                                 ))}
                             </div>
 
                             {/* Quote */}
-                            <blockquote className="text-white text-lg leading-relaxed mb-6">
+                            <blockquote className="text-gray-900 dark:text-white text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
                                 "{testimonial.content}"
                             </blockquote>
 
                             {/* Attribution */}
                             <div>
-                                <h4 className="text-white font-semibold text-lg mb-1">
+                                <h4 className="text-gray-900 dark:text-white font-semibold text-base sm:text-lg mb-1">
                                     {testimonial.name}
                                 </h4>
-                                <p className="text-neutral-300 text-base">
+                                <p className="text-gray-700 dark:text-neutral-300 text-sm sm:text-base">
                                     {testimonial.role}
                                 </p>
                             </div>

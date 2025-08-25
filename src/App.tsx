@@ -12,10 +12,14 @@ import { CTASection } from './components/sections/CTASection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/ui/Footer';
 import { useUIStore } from './store/uiStore';
+import { useScrollManager } from './hooks/useScrollManager';
 import { useEffect, memo } from 'react';
 
 const App = memo(() => {
   const { isDarkMode } = useUIStore();
+
+  // Initialize scroll manager
+  useScrollManager();
 
   // Apply dark mode class to document on mount
   useEffect(() => {

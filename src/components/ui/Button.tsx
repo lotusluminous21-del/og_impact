@@ -21,9 +21,9 @@ export const Button: React.FC<ButtonProps> = ({
     const baseClasses = 'relative inline-flex items-center justify-center font-medium transition-all duration-300 rounded-lg overflow-hidden';
 
     const variants = {
-        primary: 'bg-white text-black hover:bg-neutral-200 border-0',
+        primary: 'bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-neutral-200 border-0',
         secondary: 'bg-primary-600 text-white hover:bg-primary-700',
-        outline: 'border-2 border-neutral-600 text-neutral-300 hover:border-neutral-500 hover:bg-neutral-800',
+        outline: 'border-2 border-gray-300 dark:border-neutral-600 text-gray-700 dark:text-neutral-300 hover:border-gray-400 dark:hover:border-neutral-500 hover:bg-gray-100 dark:hover:bg-neutral-800',
     };
 
     const sizes = {
@@ -52,7 +52,7 @@ export const Button: React.FC<ButtonProps> = ({
             }}
         >
             <motion.div
-                className="absolute inset-0 bg-white opacity-0 hover:opacity-10 transition-opacity duration-300"
+                className="absolute inset-0 bg-white dark:bg-black opacity-0 hover:opacity-10 transition-opacity duration-300"
                 whileHover={{ opacity: 0.1 }}
             />
             {children}
