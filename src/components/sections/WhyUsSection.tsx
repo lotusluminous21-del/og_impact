@@ -217,7 +217,7 @@ export const WhyUsSection = () => {
                     <Button
                         variant="primary"
                         size="lg"
-                        onClick={() => scrollToElement('pricing')}
+                        onClick={() => scrollToElement('services', -240)}
                         className="bg-secondary-400 text-white hover:bg-secondary-500 border-0 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold w-full sm:w-auto"
                     >
                         See Pricing

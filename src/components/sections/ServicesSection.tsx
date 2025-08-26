@@ -113,8 +113,8 @@ export const ServicesSection: React.FC = () => {
         threshold: 0.1
     });
 
-    // Row-based expansion state instead of global
-    const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
+    // Row-based expansion state instead of global - initialize with first row expanded
+    const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set([0]));
 
     // Add window size state to trigger recalculation
     const [windowSize, setWindowSize] = useState({
