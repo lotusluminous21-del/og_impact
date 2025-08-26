@@ -6,6 +6,14 @@ import { AutomatixButton } from '../ui/AutomatixButton';
 import { scrollToElement } from '../../utils/scrollUtils';
 import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
 
+// Import service images
+import socialMediaImage from '../../assets/a-professional--minimalist-office-desk-at-night--t.png';
+import webinarRoomImage from '../../assets/an-empty--professional-video-recording-studio--per.png';
+import automatedWebinarImage from '../../assets/a-dramatic-close-up-of-a-sleek--dark-themed-softwa.png';
+import leadCaptureImage from '../../assets/a-high-resolution-photograph-of-a-modern-crm-dashb.png';
+import aiChatbotImage from '../../assets/a-developer-s-dual-monitor-setup-in-a-dark-room--t.png';
+import adCampaignImage from '../../assets/a-macro-shot-of-a-digital-advertising-dashboard-on.png';
+
 const services = [
     {
         title: "Social Media Management",
@@ -265,12 +273,12 @@ export const ServicesSection: React.FC = () => {
                     {services.map((service, index) => {
                         // Define images for each service card
                         const cardImages = [
-                            '/src/assets/a-professional--minimalist-office-desk-at-night--t.png', // Social Media Management (top-left)
-                            '/src/assets/an-empty--professional-video-recording-studio--per.png', // Webinar Room (middle-top)
-                            '/src/assets/a-dramatic-close-up-of-a-sleek--dark-themed-softwa.png', // Automated Webinar System (top-right)
-                            '/src/assets/a-high-resolution-photograph-of-a-modern-crm-dashb.png', // Lead Capture & Autoresponders (bottom-left)
-                            '/src/assets/a-developer-s-dual-monitor-setup-in-a-dark-room--t.png', // AI Chatbot Development (bottom-middle)
-                            '/src/assets/a-macro-shot-of-a-digital-advertising-dashboard-on.png' // Ad Campaign Setup (bottom-right)
+                            socialMediaImage, // Social Media Management (top-left)
+                            webinarRoomImage, // Webinar Room (middle-top)
+                            automatedWebinarImage, // Automated Webinar System (top-right)
+                            leadCaptureImage, // Lead Capture & Autoresponders (bottom-left)
+                            aiChatbotImage, // AI Chatbot Development (bottom-middle)
+                            adCampaignImage // Ad Campaign Setup (bottom-right)
                         ];
 
                         return (

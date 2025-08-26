@@ -1,11 +1,12 @@
 import { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ArrowRight } from 'lucide-react';
+import { scrollToElement } from '../../utils/scrollUtils';
 import { useUIStore } from '../../store/uiStore';
+import originalGlobalImpactLogo from '../../assets/original_global_impact_logo.svg';
+import { AutomatixButton } from './AutomatixButton';
 import { ThemeToggle } from './ThemeToggle';
 import { useOptimizedScroll } from '../../utils/performance';
-import { scrollToElement } from '../../utils/scrollUtils';
-import { AutomatixButton } from './AutomatixButton';
-import { Menu, X, ArrowRight } from 'lucide-react';
 
 const Navigation = memo(() => {
     const { isMenuOpen, toggleMenu, setActiveSection, activeSection } = useUIStore();
@@ -66,7 +67,7 @@ const Navigation = memo(() => {
                             <span className="text-gray-900 dark:text-white">Impact</span>
                             <div className="ml-1">
                                 <img
-                                    src="/src/assets/original_global_impact_logo.svg"
+                                    src={originalGlobalImpactLogo}
                                     alt="Original Global Impact Logo"
                                     className="h-5 w-5 object-contain"
                                 />

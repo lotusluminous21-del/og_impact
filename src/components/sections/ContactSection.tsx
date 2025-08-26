@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Button } from '../ui/Button';
+import { useState } from 'react';
 import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
 import SendMessageButton from '../ui/SendMessageButton';
 

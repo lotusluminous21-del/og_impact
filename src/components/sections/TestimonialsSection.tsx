@@ -8,6 +8,7 @@ import {
     Zap as ZapIcon
 } from 'lucide-react';
 import { AutomatixHeroText } from '../ui/AutomatixTextReveal';
+import sarahMitchellImage from '../../assets/sarah-mitchell--marketing-director.png';
 
 const testimonials = [
     {
@@ -21,7 +22,7 @@ const testimonials = [
             salesIncrease: "73%",
             resolutionTime: "5X"
         },
-        avatar: "/src/assets/sarah-mitchell--marketing-director.png"
+        avatar: sarahMitchellImage
     },
     {
         id: 2,
