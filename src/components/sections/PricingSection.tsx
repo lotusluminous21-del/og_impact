@@ -62,35 +62,33 @@ export const PricingSection: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
                 >
-                    <AutomatixHeroText
-                        text="Simple Pricing"
-                        className="text-gray-900 dark:text-white"
-                        delay={1.0}
-                        stagger={0.03}
-                        duration={0.8}
-                        blurIntensity={6}
-                        effect="automatix-blur"
-                    />
-                    <AutomatixHeroText
-                        text="Transparent Pricing Plans"
-                        className="text-gray-900 dark:text-white"
-                        delay={1.2}
-                        stagger={0.03}
-                        duration={0.8}
-                        blurIntensity={6}
-                        effect="automatix-blur"
-                    />
-                    <AutomatixSubtitleText
-                        text="We offer adaptable pricing solutions for businesses of any size."
-                        className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
-                        delay={1.8}
-                        stagger={0.04}
-                        duration={0.7}
-                        blurIntensity={5}
-                        effect="word-reveal"
-                    />
+                    <div>
+                        <AutomatixHeroText
+                            text={[
+                                "Simple Pricing",
+                                "Transparent Pricing Plans"
+                            ]}
+                            className="text-gray-900 dark:text-white"
+                            delay={1.0}
+                            stagger={0.08}
+                            duration={0.8}
+                            blurIntensity={6}
+                            effect="word-reveal"
+                        />
+                    </div>
+                    <div>
+                        <AutomatixSubtitleText
+                            text="We offer adaptable pricing solutions for businesses of any size."
+                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
+                            delay={1.8}
+                            stagger={0.04}
+                            duration={0.7}
+                            blurIntensity={5}
+                            effect="word-reveal"
+                        />
+                    </div>
                 </motion.div>
 
                 {/* Pricing Cards */}
@@ -99,10 +97,24 @@ export const PricingSection: React.FC = () => {
                         <motion.div
                             key={plan.name}
                             className={`relative ${plan.popular ? 'md:-mt-4 md:mb-4' : ''}`}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{
+                                opacity: 0,
+                                scale: 0.95,
+                                rotateY: -2,
+                                filter: "blur(1px)"
+                            }}
+                            whileInView={{
+                                opacity: 1,
+                                scale: 1,
+                                rotateY: 0,
+                                filter: "blur(0px)"
+                            }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 2.2 + index * 0.2 }}
+                            transition={{
+                                duration: 0.4,
+                                delay: 0.4 + index * 0.1,
+                                ease: [0.25, 0.46, 0.45, 0.94]
+                            }}
                         >
                             {plan.popular && (
                                 <motion.div

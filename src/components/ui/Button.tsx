@@ -45,17 +45,36 @@ export const Button: React.FC<ButtonProps> = ({
                 scale: 0.98,
                 y: 0,
             }}
+            whileFocus={{
+                scale: 1.01,
+                boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.5)",
+            }}
             transition={{
                 type: "spring",
                 stiffness: 400,
                 damping: 17
             }}
         >
+            {/* Ripple effect background */}
             <motion.div
                 className="absolute inset-0 bg-white dark:bg-black opacity-0 hover:opacity-10 transition-opacity duration-300"
                 whileHover={{ opacity: 0.1 }}
             />
-            {children}
+
+            {/* Animated border gradient */}
+            <motion.div
+                className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 opacity-0 hover:opacity-20 transition-opacity duration-500"
+                whileHover={{ opacity: 0.2 }}
+            />
+
+            {/* Content with enhanced positioning */}
+            <motion.div
+                className="relative z-10 flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+            >
+                {children}
+            </motion.div>
         </motion.button>
     );
 };

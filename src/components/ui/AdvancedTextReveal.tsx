@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useInView, easeOut } from 'framer-motion';
 
 interface AdvancedTextRevealProps {
     text: string | string[];
@@ -36,7 +36,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
     maskDirection = 'left',
     splitOffset = 20,
     typewriterSpeed = 100,
-    typewriterDelay = 2000
+    // Removed unused typewriterDelay
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -127,7 +127,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
             ...getDirectionAnimate(),
             transition: {
                 duration: duration,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: easeOut,
             },
         },
     };
@@ -142,7 +142,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
             y: 0,
             transition: {
                 duration: duration,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: easeOut,
             },
         },
     };
@@ -157,7 +157,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
             y: 0,
             transition: {
                 duration: duration,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: easeOut,
             },
         },
     };
@@ -170,7 +170,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
             ...getMaskAnimate(),
             transition: {
                 duration: duration,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: easeOut,
             },
         },
     };
@@ -185,7 +185,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
             opacity: 1,
             transition: {
                 duration: duration,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: easeOut,
             },
         },
     };
@@ -220,16 +220,21 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
             animate={triggerOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
             variants={containerVariants}
         >
-            <div className="flex flex-wrap justify-center">
-                {textLine.split(' ').map((word, wordIndex) => (
-                    <motion.span
-                        key={wordIndex}
-                        variants={wordVariants}
-                        className={`inline-block mr-2 ${gradient ? `bg-gradient-to-r ${gradientColors.join(' ')} bg-clip-text text-transparent` : ''}`}
-                    >
-                        {word}
-                    </motion.span>
-                ))}
+            <div className="inline-block text-center">
+                <div className="inline-block text-left text-flow-natural">
+                    {textLine.split(' ').map((word, wordIndex) => (
+                        <motion.span
+                            key={wordIndex}
+                            variants={wordVariants}
+                            className={`inline-block ${gradient ? `bg-gradient-to-r ${gradientColors.join(' ')} bg-clip-text text-transparent` : ''}`}
+                            style={{
+                                marginRight: wordIndex === textLine.split(' ').length - 1 ? '0' : '0.2em', // Only add margin between words, not after last word
+                            }}
+                        >
+                            {word}
+                        </motion.span>
+                    ))}
+                </div>
             </div>
         </motion.div>
     );
@@ -350,7 +355,7 @@ export const AdvancedTextReveal: React.FC<AdvancedTextRevealProps> = ({
     return (
         <div
             ref={ref}
-            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} ${className}`}
+            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} text-container-responsive text-break-words ${className}`}
         >
             {renderEffect()}
         </div>

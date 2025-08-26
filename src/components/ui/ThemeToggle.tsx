@@ -1,18 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useUIStore } from '../../store/uiStore';
 
 export const ThemeToggle: React.FC = () => {
     const { isDarkMode, toggleDarkMode } = useUIStore();
-
-    // Apply dark mode class to document
-    useEffect(() => {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [isDarkMode]);
 
     return (
         <motion.button

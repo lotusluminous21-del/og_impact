@@ -529,7 +529,7 @@ export const EnhancedTextReveal: React.FC<EnhancedTextRevealProps> = memo(({
     return (
         <div
             ref={ref}
-            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} ${className}`}
+            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} text-container-responsive text-break-words ${className}`}
         >
             {renderEffect()}
         </div>

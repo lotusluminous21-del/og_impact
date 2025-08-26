@@ -63,26 +63,30 @@ export const TeamSection = () => {
                     transition={{ delay: 0.8, duration: 0.8 }}
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-                        <AutomatixHeroText
-                            text="Meet Our CEO"
-                            className="text-gray-900 dark:text-white"
-                            delay={1.0}
-                            stagger={0.03}
-                            duration={0.8}
-                            blurIntensity={6}
-                            effect="automatix-blur"
-                        />
+                        <div>
+                            <AutomatixHeroText
+                                text="Meet Our CEO"
+                                className="text-gray-900 dark:text-white"
+                                delay={1.0}
+                                stagger={0.08}
+                                duration={0.8}
+                                blurIntensity={6}
+                                effect="word-reveal"
+                            />
+                        </div>
                     </motion.div>
                     <motion.div variants={itemVariants}>
-                        <AutomatixSubtitleText
-                            text="A seasoned executive with over 20 years of top-level leadership experience driving business transformation and growth."
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto px-4 sm:px-0"
-                            delay={1.4}
-                            stagger={0.04}
-                            duration={0.7}
-                            blurIntensity={5}
-                            effect="word-reveal"
-                        />
+                        <div>
+                            <AutomatixSubtitleText
+                                text="A seasoned executive with over 20 years of top-level leadership experience driving business transformation and growth."
+                                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto px-4 sm:px-0 text-center"
+                                delay={1.4}
+                                stagger={0.04}
+                                duration={0.7}
+                                blurIntensity={5}
+                                effect="word-reveal"
+                            />
+                        </div>
                     </motion.div>
                 </motion.div>
 

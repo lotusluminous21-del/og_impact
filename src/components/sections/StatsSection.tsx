@@ -69,17 +69,24 @@ export const StatsSection: React.FC = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.8,
+                staggerChildren: 0.08,
+                delayChildren: 0.2,
             },
         },
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: {
+            opacity: 0,
+            scale: 0.95,
+            rotateY: -2,
+            filter: "blur(1px)"
+        },
         visible: {
             opacity: 1,
-            y: 0,
+            scale: 1,
+            rotateY: 0,
+            filter: "blur(0px)"
         },
     };
 
@@ -92,13 +99,13 @@ export const StatsSection: React.FC = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    transition={{ delay: 0.8, duration: 0.8 }}
+                    transition={{ delay: 0.2, duration: 0.4 }}
                 >
                     {stats.map((stat, index) => (
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="text-center group"
                         >
                             <motion.div
@@ -129,7 +136,7 @@ export const StatsSection: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 2.4 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
                 >
                     <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto px-4 sm:px-0">
                         Trusted by businesses worldwide for social media management, webinar solutions, AI chatbots, and digital marketing automation.

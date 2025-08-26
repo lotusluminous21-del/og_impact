@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Button } from '../ui/Button';
+import { AutomatixButton } from '../ui/AutomatixButton';
 import { AutomatixHeroText } from '../ui/AutomatixTextReveal';
 
 const works = [
@@ -35,17 +35,24 @@ export const WorksSection = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.8
+                staggerChildren: 0.08,
+                delayChildren: 0.2
             }
         }
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 50 },
+        hidden: {
+            opacity: 0,
+            scale: 0.95,
+            rotateY: -2,
+            filter: "blur(1px)"
+        },
         visible: {
             opacity: 1,
-            y: 0
+            scale: 1,
+            rotateY: 0,
+            filter: "blur(0px)"
         }
     };
 
@@ -58,27 +65,23 @@ export const WorksSection = () => {
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
                     className="text-center mb-12 sm:mb-16"
-                    transition={{ delay: 0.8, duration: 0.8 }}
+                    transition={{ delay: 0.2, duration: 0.4 }}
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-                        <AutomatixHeroText
-                            text="Work That Make Us Proud"
-                            className="text-gray-900 dark:text-white"
-                            delay={1.0}
-                            stagger={0.03}
-                            duration={0.8}
-                            blurIntensity={6}
-                            effect="automatix-blur"
-                        />
-                        <AutomatixHeroText
-                            text="Recent Works, Notable Impact"
-                            className="text-gray-900 dark:text-white"
-                            delay={1.2}
-                            stagger={0.03}
-                            duration={0.8}
-                            blurIntensity={6}
-                            effect="automatix-blur"
-                        />
+                        <div>
+                            <AutomatixHeroText
+                                text={[
+                                    "Work That Make Us Proud",
+                                    "Recent Works, Notable Impact"
+                                ]}
+                                className="text-gray-900 dark:text-white"
+                                delay={1.0}
+                                stagger={0.08}
+                                duration={0.8}
+                                blurIntensity={6}
+                                effect="word-reveal"
+                            />
+                        </div>
                     </motion.div>
                 </motion.div>
 
@@ -87,7 +90,7 @@ export const WorksSection = () => {
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-                    transition={{ delay: 1.6, duration: 0.8 }}
+                    transition={{ delay: 0.4, duration: 0.4 }}
                 >
                     {works.map((work, index) => (
                         <motion.div
@@ -139,14 +142,14 @@ export const WorksSection = () => {
                     className="text-center mt-12 sm:mt-16"
                     transition={{ delay: 2.8, duration: 0.8 }}
                 >
-                    <Button
+                    <AutomatixButton
                         variant="outline"
                         size="lg"
                         onClick={() => { }}
                         className="w-full sm:w-auto"
                     >
                         View All Works
-                    </Button>
+                    </AutomatixButton>
                 </motion.div>
             </div>
         </section>

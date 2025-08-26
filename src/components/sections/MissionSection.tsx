@@ -46,48 +46,34 @@ export const MissionSection = () => {
                     </motion.div>
 
                     {/* Main headline */}
-                    <motion.div variants={itemVariants} className="mb-8 sm:mb-12">
+                    <div className="mb-8 sm:mb-12">
                         <AutomatixHeroText
-                            text="We Automate Your Business"
+                            text={[
+                                "We Automate Your Business",
+                                "To Grow Faster While You Focus",
+                                "On What You Do Best."
+                            ]}
                             className="text-gray-900 dark:text-white"
                             delay={0.2}
-                            stagger={0.03}
+                            stagger={0.08}
                             duration={0.8}
                             blurIntensity={6}
-                            effect="automatix-blur"
+                            effect="word-reveal"
                         />
-                        <AutomatixHeroText
-                            text="To Grow Faster While You Focus"
-                            className="text-gray-900 dark:text-white"
-                            delay={0.4}
-                            stagger={0.03}
-                            duration={0.8}
-                            blurIntensity={6}
-                            effect="automatix-blur"
-                        />
-                        <AutomatixHeroText
-                            text="On What You Do Best."
-                            className="text-gray-900 dark:text-white"
-                            delay={0.6}
-                            stagger={0.03}
-                            duration={0.8}
-                            blurIntensity={6}
-                            effect="automatix-blur"
-                        />
-                    </motion.div>
+                    </div>
 
                     {/* Description paragraph */}
-                    <motion.div variants={itemVariants} className="mb-12 sm:mb-16">
+                    <div className="mb-12 sm:mb-16">
                         <AutomatixSubtitleText
                             text="We transform businesses by automating everything from social media management to AI chatbots, webinar systems, and lead generation."
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-3xl sm:max-w-4xl mx-auto leading-relaxed px-4 sm:px-0"
+                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-3xl sm:max-w-4xl mx-auto leading-relaxed px-4 sm:px-0 text-center"
                             delay={1.6}
                             stagger={0.04}
                             duration={0.7}
                             blurIntensity={5}
                             effect="word-reveal"
                         />
-                    </motion.div>
+                    </div>
 
                     {/* Book A Call link */}
                     <motion.div

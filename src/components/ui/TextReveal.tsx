@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, memo } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView, easeOut } from 'framer-motion';
 
 interface TextRevealProps {
     text: string | string[];
@@ -40,16 +40,18 @@ const AnimatedCharacter = memo<{
 const AnimatedWord = memo<{
     word: string;
     index: number;
+    totalWords: number;
     variants: any;
     gradient?: boolean;
     gradientColors?: string[];
     delay: number;
-}>(({ word, index, variants, gradient, gradientColors, delay }) => (
+}>(({ word, index, totalWords, variants, gradient, gradientColors, delay }) => (
     <motion.span
         variants={variants}
-        className={`inline-block mr-2 ${gradient ? `bg-gradient-to-r ${gradientColors?.join(' ')} bg-clip-text text-transparent` : ''}`}
+        className={`inline-block ${gradient ? `bg-gradient-to-r ${gradientColors?.join(' ')} bg-clip-text text-transparent` : ''}`}
         style={{
-            animationDelay: `${delay + index * 0.05}s`
+            animationDelay: `${delay + index * 0.05}s`,
+            marginRight: index === totalWords - 1 ? '0' : '0.2em', // Only add margin between words, not after last word
         }}
     >
         {word}
@@ -72,10 +74,6 @@ export const TextReveal: React.FC<TextRevealProps> = memo(({
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"]
-    });
 
     const [textArray, setTextArray] = useState<string[]>([]);
 
@@ -143,7 +141,7 @@ export const TextReveal: React.FC<TextRevealProps> = memo(({
             ...getDirectionAnimate(),
             transition: {
                 duration: duration * 0.7,
-                ease: [0.25, 0.46, 0.45, 0.94],
+                ease: easeOut,
             },
         },
     };
@@ -180,18 +178,21 @@ export const TextReveal: React.FC<TextRevealProps> = memo(({
                     animate={triggerOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
                     variants={containerVariants}
                 >
-                    <div className="flex flex-wrap justify-center">
-                        {words.map((word, wordIndex) => (
-                            <AnimatedWord
-                                key={wordIndex}
-                                word={word}
-                                index={wordIndex}
-                                variants={wordVariants}
-                                gradient={gradient}
-                                gradientColors={gradientColors}
-                                delay={delay + lineIndex * 0.1}
-                            />
-                        ))}
+                    <div className="inline-block text-center">
+                        <div className="inline-block text-left text-flow-natural">
+                            {words.map((word, wordIndex) => (
+                                <AnimatedWord
+                                    key={wordIndex}
+                                    word={word}
+                                    index={wordIndex}
+                                    totalWords={words.length}
+                                    variants={wordVariants}
+                                    gradient={gradient}
+                                    gradientColors={gradientColors}
+                                    delay={delay + lineIndex * 0.1}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </motion.div>
             );
@@ -248,7 +249,7 @@ export const TextReveal: React.FC<TextRevealProps> = memo(({
     return (
         <div
             ref={ref}
-            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} ${className}`}
+            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} text-container-responsive text-break-words ${className}`}
         >
             {textArray.map((line, index) => renderText(line, index))}
         </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../ui/Button';
 import { useUIStore } from '../../store/uiStore';
-import { scrollToElement } from '../../utils/scrollUtils';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixSubtitleText, AutomatixTextReveal } from '../ui/AutomatixTextReveal';
+import { EarthImpactShader } from '../ui/EarthImpactShader';
+import ViewServicesButton from '../ui/ViewServicesButton';
 
 export const HeroSection: React.FC = () => {
     const { setHeroAnimationComplete } = useUIStore();
@@ -31,18 +31,13 @@ export const HeroSection: React.FC = () => {
     };
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-black px-4 sm:px-6 lg:px-8">
-            {/* Background Grid Pattern (Automatix-inspired) */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0)`,
-                    backgroundSize: '40px 40px'
-                }}></div>
-            </div>
+        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-visible px-4 sm:px-6 lg:px-8">
+            {/* Earth Impact Shader Background */}
+            <EarthImpactShader />
 
-            <div className="max-w-7xl mx-auto relative z-10 w-full">
+            <div className="max-w-7xl mx-auto relative z-20 w-full overflow-visible">
                 <motion.div
-                    className="text-center"
+                    className="text-center overflow-visible"
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
@@ -51,7 +46,7 @@ export const HeroSection: React.FC = () => {
                     {/* Availability Badge - Updated with realistic availability */}
                     <motion.div
                         variants={itemVariants}
-                        className="inline-flex items-center px-3 sm:px-4 py-2 bg-green-500/20 text-green-600 dark:text-green-400 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-green-500/30"
+                        className="inline-flex items-center px-3 sm:px-4 py-2 bg-green-500/20 dark:bg-green-500/10 text-green-600 dark:text-green-400 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-green-500/30 dark:border-green-500/20"
                     >
                         <span className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full mr-2 animate-pulse"></span>
                         <span className="text-green-600 dark:text-green-400">
@@ -61,34 +56,43 @@ export const HeroSection: React.FC = () => {
 
                     {/* Main Heading - Updated to reflect actual business with Automatix-style animations */}
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-                        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 sm:mb-4">
-                            <AutomatixHeroText
-                                text="Original Global Impact"
-                                className="text-gray-900 dark:text-white"
-                                delay={0.3}
-                                stagger={0.02}
-                                duration={0.8}
-                                blurIntensity={6}
-                            />
-                        </div>
-                        <div className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-2 sm:mb-4">
-                            <AutomatixHeroText
+                        <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4">
+                            <AutomatixTextReveal
                                 text="Beyond ✦ Limits."
                                 className="text-gray-900 dark:text-white"
-                                delay={0.5}
-                                stagger={0.03}
+                                delay={0.3}
+                                stagger={0.08}
                                 duration={0.9}
                                 blurIntensity={8}
+                                size="4xl"
+                                weight="bold"
+                                effect="word-reveal"
                             />
                         </div>
-                        <div className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold">
-                            <AutomatixHeroText
+                        <div className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold  sm:-mt-1">
+                            <AutomatixTextReveal
                                 text="Amplified With AI."
                                 className="text-secondary-400"
-                                delay={0.9}
-                                stagger={0.025}
+                                delay={0.5}
+                                stagger={0.08}
                                 duration={1}
                                 blurIntensity={7}
+                                size="5xl"
+                                weight="bold"
+                                effect="word-reveal"
+                            />
+                        </div>
+                        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-2 sm:mb-4 overflow-visible -mt-1 sm:-mt-1">
+                            <AutomatixTextReveal
+                                text="Original Global Impact"
+                                className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text text-transparent leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] dark:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]"
+                                delay={0.9}
+                                stagger={0.08}
+                                duration={0.8}
+                                blurIntensity={6}
+                                size="8xl"
+                                weight="extrabold"
+                                effect="word-reveal"
                             />
                         </div>
                     </motion.div>
@@ -97,7 +101,7 @@ export const HeroSection: React.FC = () => {
                     <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
                         <AutomatixSubtitleText
                             text="Complete business automation solutions from $28/month. Social media, webinars, AI chatbots, and more."
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
+                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 text-center"
                             delay={0.9}
                             stagger={0.04}
                             duration={0.7}
@@ -112,14 +116,7 @@ export const HeroSection: React.FC = () => {
                         className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12"
                         transition={{ delay: 2.2, duration: 0.8 }}
                     >
-                        <Button
-                            variant="primary"
-                            size="lg"
-                            onClick={() => scrollToElement('services')}
-                            className="bg-secondary-400 text-white hover:bg-secondary-500 border-0 w-full sm:w-auto"
-                        >
-                            View Services
-                        </Button>
+                        <ViewServicesButton />
                     </motion.div>
 
                     {/* Featured Services - Updated with actual services */}

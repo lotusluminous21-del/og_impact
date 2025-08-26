@@ -66,26 +66,30 @@ export const FAQSection = () => {
                     transition={{ delay: 0.8, duration: 0.8 }}
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-                        <AutomatixHeroText
-                            text="Need to Know"
-                            className="text-gray-900 dark:text-white"
-                            delay={1.0}
-                            stagger={0.03}
-                            duration={0.8}
-                            blurIntensity={6}
-                            effect="automatix-blur"
-                        />
+                        <div>
+                            <AutomatixHeroText
+                                text="Need to Know"
+                                className="text-gray-900 dark:text-white"
+                                delay={1.0}
+                                stagger={0.08}
+                                duration={0.8}
+                                blurIntensity={6}
+                                effect="word-reveal"
+                            />
+                        </div>
                     </motion.div>
                     <motion.div variants={itemVariants} className="mb-2 sm:mb-4">
-                        <AutomatixSubtitleText
-                            text="Frequently Asked Questions"
-                            className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white"
-                            delay={1.4}
-                            stagger={0.04}
-                            duration={0.7}
-                            blurIntensity={5}
-                            effect="word-reveal"
-                        />
+                        <div>
+                            <AutomatixSubtitleText
+                                text="Frequently Asked Questions"
+                                className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white text-center"
+                                delay={1.4}
+                                stagger={0.04}
+                                duration={0.7}
+                                blurIntensity={5}
+                                effect="word-reveal"
+                            />
+                        </div>
                     </motion.div>
                 </motion.div>
 

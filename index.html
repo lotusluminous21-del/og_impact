@@ -1,13 +1,68 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <title>Vite + React + TS</title>
+  <style>
+    /* Prevent white flash during loading */
+    html {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    #root {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    /* Light mode styles */
+    html:not(.dark) {
+      background-color: #ffffff;
+      color: #111827;
+    }
+
+    html:not(.dark) body {
+      background-color: #ffffff;
+      color: #111827;
+    }
+
+    html:not(.dark) #root {
+      background-color: #ffffff;
+      color: #111827;
+    }
+  </style>
+  <script>
+    // Immediately apply dark mode to prevent white flash
+    (function () {
+      // Check localStorage for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      // Default to dark mode, but respect saved preference
+      const shouldUseDarkMode = savedTheme === 'dark' || (savedTheme === null && prefersDark);
+
+      if (shouldUseDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

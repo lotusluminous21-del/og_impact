@@ -4,7 +4,8 @@ import { useUIStore } from '../../store/uiStore';
 import { ThemeToggle } from './ThemeToggle';
 import { useOptimizedScroll } from '../../utils/performance';
 import { scrollToElement } from '../../utils/scrollUtils';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { AutomatixButton } from './AutomatixButton';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 const Navigation = memo(() => {
     const { isMenuOpen, toggleMenu, setActiveSection, activeSection } = useUIStore();
@@ -56,14 +57,20 @@ const Navigation = memo(() => {
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
                         <motion.div
-                            className="flex items-center gap-2 text-xl font-bold cursor-pointer"
+                            className="flex items-center gap-0 text-xl font-bold cursor-pointer"
                             whileHover={{ scale: 1.05 }}
                             transition={{ type: "spring", stiffness: 400 }}
                             onClick={() => scrollToElement('home')}
                         >
                             <span className="text-secondary-400">OG</span>
                             <span className="text-gray-900 dark:text-white">Impact</span>
-                            <span className="text-primary-400 text-lg">+</span>
+                            <div className="ml-1">
+                                <img
+                                    src="/src/assets/original_global_impact_logo.svg"
+                                    alt="Original Global Impact Logo"
+                                    className="h-5 w-5 object-contain"
+                                />
+                            </div>
                         </motion.div>
 
                         {/* Desktop Navigation */}
@@ -94,15 +101,15 @@ const Navigation = memo(() => {
                         {/* CTA Button & Mobile Menu Button */}
                         <div className="flex items-center space-x-4">
                             {/* CTA Button */}
-                            <motion.button
+                            <AutomatixButton
                                 onClick={() => scrollToElement('contact')}
-                                className="hidden md:flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors duration-200"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                variant="primary"
+                                size="sm"
+                                showArrow={true}
+                                className="hidden md:flex"
                             >
                                 Let's Talk
-                                <ArrowRight className="w-4 h-4" />
-                            </motion.button>
+                            </AutomatixButton>
 
                             <ThemeToggle />
 

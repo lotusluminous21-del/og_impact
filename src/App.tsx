@@ -21,7 +21,7 @@ const App = memo(() => {
   // Initialize scroll manager
   useScrollManager();
 
-  // Apply dark mode class to document on mount
+  // Apply dark mode class to document on mount and when theme changes
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -29,6 +29,20 @@ const App = memo(() => {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  // Ensure theme is synchronized on mount
+  useEffect(() => {
+    // Check if the HTML script has already set the theme
+    const hasDarkClass = document.documentElement.classList.contains('dark');
+    const savedTheme = localStorage.getItem('theme');
+
+    // If there's a mismatch, sync it
+    if (savedTheme === 'dark' && !hasDarkClass) {
+      document.documentElement.classList.add('dark');
+    } else if (savedTheme === 'light' && hasDarkClass) {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   return (
     <div className="App bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">

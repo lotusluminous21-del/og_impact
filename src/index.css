@@ -15,6 +15,7 @@
     font-family: 'Inter', system-ui, sans-serif;
     background-color: #ffffff;
     color: #111827;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .dark body {
@@ -25,6 +26,18 @@
   /* Ensure sections have proper scroll targets */
   section[id] {
     scroll-margin-top: 80px;
+  }
+
+  /* Prevent flash by setting initial background */
+  #root {
+    background-color: #ffffff;
+    color: #111827;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark #root {
+    background-color: #000000;
+    color: #ffffff;
   }
 }
 
@@ -53,5 +66,79 @@
 
   .dark .grid-pattern {
     background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+  }
+
+  /* Improved text spacing for mobile responsiveness */
+  .text-word-spacing {
+    word-spacing: 0.05em;
+    letter-spacing: 0.01em;
+  }
+
+  /* Ensure proper line breaks on mobile */
+  .text-break-words {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Responsive text container */
+  .text-container-responsive {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  /* Ensure natural text flow for animated text */
+  .text-flow-natural {
+    white-space: normal;
+    word-spacing: normal;
+    letter-spacing: normal;
+  }
+
+  /* Prevent flex containers from breaking text flow */
+  .text-no-flex-break {
+    display: inline-block;
+    text-align: left;
+  }
+
+  /* Contact form enhancements */
+  /* Custom scrollbar for textarea */
+  textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 4px;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  .dark textarea::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  .dark textarea::-webkit-scrollbar-thumb {
+    background: #6b7280;
+  }
+
+  .dark textarea::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+
+  /* Firefox scrollbar */
+  textarea {
+    scrollbar-width: thin;
+    scrollbar-color: #9ca3af #f3f4f6;
+  }
+
+  .dark textarea {
+    scrollbar-color: #6b7280 #374151;
   }
 }
