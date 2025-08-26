@@ -14,6 +14,7 @@ import { Footer } from './components/ui/Footer';
 import { useUIStore } from './store/uiStore';
 import { useScrollManager } from './hooks/useScrollManager';
 import { useEffect, memo } from 'react';
+import { logThemeInfo } from './utils/themeUtils';
 
 const App = memo(() => {
   const { isDarkMode } = useUIStore();
@@ -43,6 +44,13 @@ const App = memo(() => {
       document.documentElement.classList.remove('dark');
     }
   }, []);
+
+  // Debug theme information in development
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      logThemeInfo();
+    }
+  }, [isDarkMode]);
 
   return (
     <div className="App bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">

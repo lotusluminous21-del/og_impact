@@ -23,20 +23,23 @@ interface UIState {
     setScrolling: (scrolling: boolean) => void;
     toggleDarkMode: () => void;
     setDarkMode: (dark: boolean) => void;
+    resetToSystemTheme: () => void;
     setHeroAnimationComplete: (complete: boolean) => void;
 }
 
-// Helper function to get initial theme from localStorage
+// Helper function to get initial theme from localStorage and system preference
 const getInitialTheme = (): boolean => {
     if (typeof window === 'undefined') return true; // Default to dark mode for SSR
 
     const savedTheme = localStorage.getItem('theme');
 
-    // If theme is saved, use it; otherwise default to dark mode
+    // If theme is saved, use it
     if (savedTheme === 'light') return false;
     if (savedTheme === 'dark') return true;
 
-    return true; // Default to dark mode
+    // If no saved preference, check system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark;
 };
 
 export const useUIStore = create<UIState>((set) => ({
@@ -65,5 +68,25 @@ export const useUIStore = create<UIState>((set) => ({
         localStorage.setItem('theme', dark ? 'dark' : 'light');
         return { isDarkMode: dark };
     }),
+    resetToSystemTheme: () => set(() => {
+        // Remove saved preference and use system preference
+        localStorage.removeItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return { isDarkMode: prefersDark };
+    }),
     setHeroAnimationComplete: (complete) => set({ heroAnimationComplete: complete }),
 }));
+
+// Initialize system theme listener
+if (typeof window !== 'undefined') {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    mediaQuery.addEventListener('change', (e) => {
+        const savedTheme = localStorage.getItem('theme');
+
+        // Only update if user hasn't set a manual preference
+        if (savedTheme === null) {
+            useUIStore.getState().setDarkMode(e.matches);
+        }
+    });
+}

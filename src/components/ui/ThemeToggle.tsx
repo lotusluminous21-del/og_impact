@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useUIStore } from '../../store/uiStore';
+import { isFollowingSystemTheme } from '../../utils/themeUtils';
 
 export const ThemeToggle: React.FC = () => {
     const { isDarkMode, toggleDarkMode } = useUIStore();
+    const followingSystem = isFollowingSystemTheme();
 
     return (
         <motion.button
@@ -11,10 +13,19 @@ export const ThemeToggle: React.FC = () => {
             className="relative p-2 rounded-lg bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={
+                followingSystem
+                    ? `${isDarkMode ? 'Dark' : 'Light'} mode (following system)`
+                    : `${isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}`
+            }
+            title={
+                followingSystem
+                    ? `${isDarkMode ? 'Dark' : 'Light'} mode (following system)`
+                    : `${isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}`
+            }
         >
             <motion.div
-                className="w-5 h-5"
+                className="w-5 h-5 relative"
                 animate={{ rotate: isDarkMode ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
             >
@@ -42,6 +53,11 @@ export const ThemeToggle: React.FC = () => {
                     >
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                     </svg>
+                )}
+
+                {/* System theme indicator */}
+                {followingSystem && (
+                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full border border-white dark:border-gray-800" />
                 )}
             </motion.div>
         </motion.button>

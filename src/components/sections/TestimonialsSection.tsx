@@ -216,14 +216,31 @@ export const TestimonialsSection: React.FC = () => {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                     transition={{ delay: 2.0, duration: 0.8 }}
                 >
-                    {otherTestimonials.map((testimonial) => (
+                    {otherTestimonials.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.id}
-                            variants={itemVariants}
                             className="group relative p-6 rounded-xl transition-all duration-300"
-                            whileHover={{
-                                scale: 1.02,
-                                transition: { duration: 0.2 }
+                            initial={{
+                                opacity: 0,
+                                scale: 0.95,
+                                rotateY: -2,
+                                filter: "blur(1px)"
+                            }}
+                            animate={inView ? {
+                                opacity: 1,
+                                scale: 1,
+                                rotateY: 0,
+                                filter: "blur(0px)"
+                            } : {
+                                opacity: 0,
+                                scale: 0.95,
+                                rotateY: -2,
+                                filter: "blur(1px)"
+                            }}
+                            transition={{
+                                delay: 2.2 + (index * 0.08),
+                                duration: 0.4,
+                                ease: [0.25, 0.46, 0.45, 0.94]
                             }}
                         >
                             {/* Subtle background highlight on hover */}
@@ -245,7 +262,7 @@ export const TestimonialsSection: React.FC = () => {
                                 </div>
 
                                 {/* Quote */}
-                                <blockquote className="text-gray-900 dark:text-white text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
+                                <blockquote className="text-gray-600 dark:text-neutral-400 group-hover:text-gray-900 dark:group-hover:text-white text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 transition-colors duration-300">
                                     "{testimonial.content}"
                                 </blockquote>
 
