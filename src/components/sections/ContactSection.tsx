@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 import SendMessageButton from '../ui/SendMessageButton';
 
 export const ContactSection: React.FC = () => {
@@ -121,26 +121,28 @@ export const ContactSection: React.FC = () => {
                         variants={itemVariants}
                         transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
                     >
-                        <div className="text-left [&>*]:text-left [&_div]:text-left [&_span]:text-left mb-6 sm:mb-8">
-                            <AutomatixHeroText
+                        <div className="text-center lg:text-left [&>*]:text-center lg:[&>*]:text-left [&_div]:text-center lg:[&_div]:text-left [&_span]:text-center lg:[&_span]:text-left mb-6 sm:mb-8">
+                            <AutomatixTextReveal
                                 text="Ready to Scale Your Business?"
-                                className="text-gray-900 dark:text-white"
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center lg:text-left"
                                 delay={0.2}
                                 stagger={0.08}
                                 duration={0.8}
                                 blurIntensity={6}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
-                        <div className="text-left mb-8 sm:mb-10 [&>*]:text-left [&_div]:text-left [&_span]:text-left">
-                            <AutomatixSubtitleText
+                        <div className="text-center lg:text-left mb-8 sm:mb-10 [&>*]:text-center lg:[&>*]:text-left [&_div]:text-center lg:[&_div]:text-left [&_span]:text-center lg:[&_span]:text-left">
+                            <AutomatixTextReveal
                                 text="Let's discuss how our automation solutions can transform your digital presence. From social media management to AI chatbots, we'll create a strategy that drives results."
-                                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 leading-relaxed"
+                                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center lg:text-left"
                                 delay={1.4}
                                 stagger={0.04}
                                 duration={0.7}
                                 blurIntensity={5}
                                 effect="line-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
 

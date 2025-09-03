@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 
 const pricingPlans = [
     {
@@ -65,28 +65,30 @@ export const PricingSection: React.FC = () => {
                     transition={{ duration: 0.4, delay: 0.2 }}
                 >
                     <div>
-                        <AutomatixHeroText
+                        <AutomatixTextReveal
                             text={[
                                 "Simple Pricing",
                                 "Transparent Pricing Plans"
                             ]}
-                            className="text-gray-900 dark:text-white"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                             delay={1.0}
                             stagger={0.08}
                             duration={0.8}
                             blurIntensity={6}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
                     <div>
-                        <AutomatixSubtitleText
+                        <AutomatixTextReveal
                             text="We offer adaptable pricing solutions for businesses of any size."
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
+                            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center"
                             delay={1.8}
                             stagger={0.04}
                             duration={0.7}
                             blurIntensity={5}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
                 </motion.div>
@@ -140,16 +142,41 @@ export const PricingSection: React.FC = () => {
                             >
                                 {/* Header */}
                                 <div className="text-center mb-6 sm:mb-8">
-                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                                        {plan.name}
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-neutral-400 text-sm sm:text-base mb-4 sm:mb-6">
-                                        {plan.description}
-                                    </p>
+                                    <div className="mb-2">
+                                        <AutomatixTextReveal
+                                            text={plan.name}
+                                            className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white leading-tight"
+                                            delay={0.2}
+                                            stagger={0.08}
+                                            duration={0.6}
+                                            blurIntensity={4}
+                                            effect="word-reveal"
+                                            triggerOnScroll={true}
+                                        />
+                                    </div>
                                     <div className="mb-4 sm:mb-6">
-                                        <span className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-                                            ${plan.price}
-                                        </span>
+                                        <AutomatixTextReveal
+                                            text={plan.description}
+                                            className="text-gray-600 dark:text-neutral-400 text-sm sm:text-base leading-relaxed"
+                                            delay={0.3}
+                                            stagger={0.04}
+                                            duration={0.5}
+                                            blurIntensity={3}
+                                            effect="word-reveal"
+                                            triggerOnScroll={true}
+                                        />
+                                    </div>
+                                    <div className="mb-4 sm:mb-6">
+                                        <AutomatixTextReveal
+                                            text={`$${plan.price}`}
+                                            className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight"
+                                            delay={0.4}
+                                            stagger={0.1}
+                                            duration={0.6}
+                                            blurIntensity={5}
+                                            effect="character-reveal"
+                                            triggerOnScroll={true}
+                                        />
                                         <span className="text-gray-600 dark:text-neutral-400 text-sm sm:text-base">/{plan.period}</span>
                                     </div>
                                 </div>

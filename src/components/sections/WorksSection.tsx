@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { AutomatixButton } from '../ui/AutomatixButton';
-import { AutomatixHeroText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 
 const works = [
     {
@@ -69,17 +69,18 @@ export const WorksSection = () => {
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
                         <div>
-                            <AutomatixHeroText
+                            <AutomatixTextReveal
                                 text={[
                                     "Work That Make Us Proud",
                                     "Recent Works, Notable Impact"
                                 ]}
-                                className="text-gray-900 dark:text-white"
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                                 delay={1.0}
                                 stagger={0.08}
                                 duration={0.8}
                                 blurIntensity={6}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
                     </motion.div>
@@ -113,12 +114,28 @@ export const WorksSection = () => {
                             </div>
 
                             <div className="p-4 sm:p-6">
-                                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-900 dark:text-white">
-                                    {work.title}
-                                </h3>
-                                <p className="text-sm sm:text-base text-gray-600 dark:text-neutral-400 leading-relaxed">
-                                    {work.description}
-                                </p>
+                                <div className="mb-2 sm:mb-3">
+                                    <AutomatixTextReveal
+                                        text={work.title}
+                                        className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white leading-tight"
+                                        delay={0.2}
+                                        stagger={0.08}
+                                        duration={0.6}
+                                        blurIntensity={4}
+                                        effect="word-reveal"
+                                        triggerOnScroll={true}
+                                    />
+                                </div>
+                                <AutomatixTextReveal
+                                    text={work.description}
+                                    className="text-sm sm:text-base text-gray-600 dark:text-neutral-400 leading-relaxed"
+                                    delay={0.4}
+                                    stagger={0.04}
+                                    duration={0.5}
+                                    blurIntensity={3}
+                                    effect="word-reveal"
+                                    triggerOnScroll={true}
+                                />
 
                                 <div className="mt-4 sm:mt-6 flex items-center justify-between">
                                     <button className="text-primary-400 font-semibold hover:text-primary-300 transition-colors duration-300 text-sm sm:text-base">

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '../ui/Button';
 import { scrollToElement } from '../../utils/scrollUtils';
 import thomasImage from '../../assets/thomas.png';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 import { CEOScriptDialog } from '../ui/CEOScriptDialog';
 
 const ceoInfo = {
@@ -56,39 +56,41 @@ export const TeamSection = () => {
     };
 
     return (
-        <section id="team" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black">
+        <section id="team" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     ref={ref}
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mb-12 sm:mb-16"
+                    className="text-center mb-8 sm:mb-12 lg:mb-16"
                     transition={{ delay: 0.8, duration: 0.8 }}
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
                         <div>
-                            <AutomatixHeroText
+                            <AutomatixTextReveal
                                 text="Meet Our CEO"
-                                className="text-gray-900 dark:text-white"
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                                 delay={1.0}
                                 stagger={0.08}
                                 duration={0.8}
                                 blurIntensity={6}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
                     </motion.div>
                     <motion.div variants={itemVariants}>
                         <div>
-                            <AutomatixSubtitleText
+                            <AutomatixTextReveal
                                 text="A seasoned executive with over 20 years of top-level leadership experience driving business transformation and growth."
-                                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto px-4 sm:px-0 text-center"
+                                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center"
                                 delay={1.4}
                                 stagger={0.04}
                                 duration={0.7}
                                 blurIntensity={5}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
                     </motion.div>
@@ -98,7 +100,7 @@ export const TeamSection = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="flex flex-col lg:flex-row gap-8 sm:gap-12 items-start"
+                    className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center lg:items-start"
                     transition={{ delay: 1.6, duration: 0.8 }}
                 >
                     {/* CEO Image and Basic Info */}
@@ -106,12 +108,12 @@ export const TeamSection = () => {
                         variants={itemVariants}
                         className="text-center lg:text-left flex-shrink-0"
                     >
-                        <div className="relative mb-6 sm:mb-8">
-                            <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto lg:mx-0 overflow-hidden rounded-full">
+                        <div className="relative mb-4 sm:mb-6 lg:mb-8">
+                            <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto lg:mx-0 overflow-hidden rounded-full">
                                 <img
                                     src={ceoInfo.image}
                                     alt={ceoInfo.name}
-                                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                    className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
                             </div>
@@ -127,12 +129,30 @@ export const TeamSection = () => {
                             </div>
                         </div>
 
-                        <h3 className="text-xl sm:text-2xl font-bold mb-2 text-gray-900 dark:text-white">
-                            {ceoInfo.name}
-                        </h3>
-                        <p className="text-gray-600 dark:text-neutral-400 font-medium mb-4 sm:mb-6">
-                            {ceoInfo.role}
-                        </p>
+                        <div className="mb-1 sm:mb-2">
+                            <AutomatixTextReveal
+                                text={ceoInfo.name}
+                                className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white leading-tight text-center lg:text-left"
+                                delay={0.2}
+                                stagger={0.08}
+                                duration={0.6}
+                                blurIntensity={4}
+                                effect="word-reveal"
+                                triggerOnScroll={true}
+                            />
+                        </div>
+                        <div className="mb-3 sm:mb-4 lg:mb-6">
+                            <AutomatixTextReveal
+                                text={ceoInfo.role}
+                                className="text-gray-600 dark:text-neutral-400 font-medium leading-relaxed text-center lg:text-left"
+                                delay={0.4}
+                                stagger={0.04}
+                                duration={0.5}
+                                blurIntensity={3}
+                                effect="word-reveal"
+                                triggerOnScroll={true}
+                            />
+                        </div>
 
                         <div className="flex justify-center lg:justify-start space-x-3">
                             {/* CEO Script Button - first in the row, expands towards the right */}
@@ -165,17 +185,28 @@ export const TeamSection = () => {
                     </motion.div>
 
                     {/* Spacer - takes up all available space with max width */}
-                    <div className="hidden lg:block flex-1 max-w-56" />
+                    <div className="hidden lg:block flex-1 max-w-48 xl:max-w-56" />
 
                     {/* CEO Details */}
                     <motion.div
                         variants={itemVariants}
-                        className="space-y-6 sm:space-y-8 flex-1"
+                        className="space-y-4 sm:space-y-6 lg:space-y-8 flex-1"
                     >
                         {/* Key Achievements */}
                         <div>
-                            <h4 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Key Achievements</h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                            <div className="mb-2 sm:mb-3 lg:mb-4">
+                                <AutomatixTextReveal
+                                    text="Key Achievements"
+                                    className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white leading-tight text-center lg:text-left"
+                                    delay={0.2}
+                                    stagger={0.08}
+                                    duration={0.6}
+                                    blurIntensity={4}
+                                    effect="word-reveal"
+                                    triggerOnScroll={true}
+                                />
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 lg:gap-3">
                                 {ceoInfo.achievements.map((achievement, index) => (
                                     <div key={index} className="flex items-center space-x-2 sm:space-x-3">
                                         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-secondary-400 rounded-full flex-shrink-0"></div>
@@ -187,8 +218,19 @@ export const TeamSection = () => {
 
                         {/* Core Expertise */}
                         <div>
-                            <h4 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Core Expertise</h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                            <div className="mb-2 sm:mb-3 lg:mb-4">
+                                <AutomatixTextReveal
+                                    text="Core Expertise"
+                                    className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white leading-tight text-center lg:text-left"
+                                    delay={0.3}
+                                    stagger={0.08}
+                                    duration={0.6}
+                                    blurIntensity={4}
+                                    effect="word-reveal"
+                                    triggerOnScroll={true}
+                                />
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 lg:gap-3">
                                 {ceoInfo.expertise.map((expertise, index) => (
                                     <div key={index} className="flex items-center space-x-2 sm:space-x-3">
                                         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary-600 rounded-full flex-shrink-0"></div>
@@ -200,8 +242,19 @@ export const TeamSection = () => {
 
                         {/* Education & Credentials */}
                         <div>
-                            <h4 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Education & Credentials</h4>
-                            <div className="space-y-2">
+                            <div className="mb-2 sm:mb-3 lg:mb-4">
+                                <AutomatixTextReveal
+                                    text="Education & Credentials"
+                                    className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white leading-tight text-center lg:text-left"
+                                    delay={0.4}
+                                    stagger={0.08}
+                                    duration={0.6}
+                                    blurIntensity={4}
+                                    effect="word-reveal"
+                                    triggerOnScroll={true}
+                                />
+                            </div>
+                            <div className="space-y-1.5 sm:space-y-2">
                                 <div className="flex items-center space-x-2 sm:space-x-3">
                                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full flex-shrink-0"></div>
                                     <span className="text-xs sm:text-sm text-gray-700 dark:text-neutral-300">Bachelor of Science in Accounting (Honors) - Florida State University</span>
@@ -223,10 +276,10 @@ export const TeamSection = () => {
                     variants={itemVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mt-12 sm:mt-16"
+                    className="text-center mt-8 sm:mt-12 lg:mt-16"
                     transition={{ delay: 2.8, duration: 0.8 }}
                 >
-                    <p className="text-gray-600 dark:text-neutral-400 mb-6 sm:mb-8 px-4 sm:px-0">
+                    <p className="text-gray-600 dark:text-neutral-400 mb-4 sm:mb-6 lg:mb-8 px-4 sm:px-0 text-sm sm:text-base">
                         Ready to work with our experienced leadership team?
                     </p>
                     <Button

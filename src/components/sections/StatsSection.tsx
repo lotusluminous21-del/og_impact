@@ -138,7 +138,7 @@ export const StatsSection: React.FC = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.8 }}
                 >
-                    <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto px-4 sm:px-0">
+                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center">
                         Trusted by businesses worldwide for social media management, webinar solutions, AI chatbots, and digital marketing automation.
                     </p>
                 </motion.div>

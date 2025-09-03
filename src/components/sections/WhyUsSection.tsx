@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '../ui/Button';
 import { scrollToElement } from '../../utils/scrollUtils';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 import geometricImage from '../../assets/a-single--intricate--brightly-glowing-orange-geome.png';
 import ribbonsImage from '../../assets/several-smooth--glowing-white-and-orange-ribbons-o.png';
 import ringsImage from '../../assets/two-large--glowing-rings--one-brilliant-white-and-.png';
@@ -75,17 +75,17 @@ export const WhyUsSection = () => {
     };
 
     return (
-        <section id="why-us" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black relative overflow-hidden">
+        <section id="why-us" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black relative overflow-hidden">
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Why Us Tag */}
                 <motion.div
                     variants={itemVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mb-6 sm:mb-8"
+                    className="text-center mb-8 sm:mb-10"
                     transition={{ delay: 0.6, duration: 0.8 }}
                 >
-                    <span className="inline-block px-3 sm:px-4 py-2 bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white text-xs sm:text-sm font-medium rounded-full border border-gray-200 dark:border-neutral-700">
+                    <span className="inline-block px-4 sm:px-5 py-2.5 sm:py-2 bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white text-sm sm:text-base font-medium rounded-full border border-gray-200 dark:border-neutral-700">
                         Why Us
                     </span>
                 </motion.div>
@@ -99,28 +99,30 @@ export const WhyUsSection = () => {
                     transition={{ delay: 0.8, duration: 0.8 }}
                 >
                     <div className="mb-4 sm:mb-6">
-                        <AutomatixHeroText
+                        <AutomatixTextReveal
                             text={[
                                 "Experience The Benefits",
                                 "Of Our Expertise"
                             ]}
-                            className="text-gray-900 dark:text-white"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                             delay={0.2}
                             stagger={0.08}
                             duration={0.8}
                             blurIntensity={6}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
                     <div>
-                        <AutomatixSubtitleText
+                        <AutomatixTextReveal
                             text="That drives impactful results and powerful business growth"
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto px-4 sm:px-0 text-center"
+                            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center"
                             delay={0.6}
                             stagger={0.04}
                             duration={0.7}
                             blurIntensity={5}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
                 </motion.div>
@@ -195,12 +197,28 @@ export const WhyUsSection = () => {
                                 </div>
 
                                 <div className="text-center">
-                                    <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">
-                                        {feature.title}
-                                    </h3>
-                                    <p className="text-sm sm:text-base text-gray-600 dark:text-neutral-400 leading-relaxed text-center">
-                                        {feature.description}
-                                    </p>
+                                    <div className="mb-3 sm:mb-4">
+                                        <AutomatixTextReveal
+                                            text={feature.title}
+                                            className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight text-center"
+                                            delay={0.2}
+                                            stagger={0.08}
+                                            duration={0.6}
+                                            blurIntensity={4}
+                                            effect="word-reveal"
+                                            triggerOnScroll={true}
+                                        />
+                                    </div>
+                                    <AutomatixTextReveal
+                                        text={feature.description}
+                                        className="text-sm sm:text-base text-gray-600 dark:text-neutral-400 leading-relaxed text-center"
+                                        delay={0.4}
+                                        stagger={0.04}
+                                        duration={0.5}
+                                        blurIntensity={3}
+                                        effect="word-reveal"
+                                        triggerOnScroll={true}
+                                    />
                                 </div>
                             </motion.div>
                         );

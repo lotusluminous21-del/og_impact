@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { scrollToElement } from '../../utils/scrollUtils';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 
 export const MissionSection = () => {
     const [ref, inView] = useInView({
@@ -47,31 +47,33 @@ export const MissionSection = () => {
 
                     {/* Main headline */}
                     <div className="mb-8 sm:mb-12">
-                        <AutomatixHeroText
+                        <AutomatixTextReveal
                             text={[
                                 "We Automate Your Business",
                                 "To Grow Faster While You Focus",
                                 "On What You Do Best."
                             ]}
-                            className="text-gray-900 dark:text-white"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                             delay={0.2}
                             stagger={0.08}
                             duration={0.8}
                             blurIntensity={6}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
 
                     {/* Description paragraph */}
                     <div className="mb-12 sm:mb-16">
-                        <AutomatixSubtitleText
+                        <AutomatixTextReveal
                             text="We transform businesses by automating everything from social media management to AI chatbots, webinar systems, and lead generation."
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-3xl sm:max-w-4xl mx-auto leading-relaxed px-4 sm:px-0 text-center"
+                            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center"
                             delay={1.6}
                             stagger={0.04}
                             duration={0.7}
                             blurIntensity={5}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
 

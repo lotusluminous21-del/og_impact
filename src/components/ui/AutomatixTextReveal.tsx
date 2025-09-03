@@ -10,11 +10,8 @@ interface AutomatixTextRevealProps {
     gradient?: boolean;
     gradientColors?: string[];
     triggerOnScroll?: boolean;
-    size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
-    weight?: 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
     blurIntensity?: number;
     effect?: 'automatix-blur' | 'character-reveal' | 'word-reveal' | 'line-reveal';
-    performance?: 'high' | 'medium' | 'low';
 }
 
 // Memoized character component for Automatix-style blur effects
@@ -91,16 +88,11 @@ export const AutomatixTextReveal: React.FC<AutomatixTextRevealProps> = memo(({
     gradient = false,
     gradientColors = ['from-primary-600', 'to-secondary-600'],
     triggerOnScroll = false,
-
-    size = 'lg',
-    weight = 'bold',
     blurIntensity = 6,
     effect = 'automatix-blur',
-    // Removed unused performance
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
-    // Removed unused scrollYProgress
 
     const [textArray, setTextArray] = useState<string[]>([]);
 
@@ -111,8 +103,6 @@ export const AutomatixTextReveal: React.FC<AutomatixTextRevealProps> = memo(({
             setTextArray([text]);
         }
     }, [text]);
-
-
 
     // Automatix-style container variants with blur effect
     const automatixContainerVariants = {
@@ -230,32 +220,39 @@ export const AutomatixTextReveal: React.FC<AutomatixTextRevealProps> = memo(({
         </motion.div>
     );
 
-    const renderWordRevealEffect = (textLine: string, lineIndex: number) => (
-        <motion.div
-            key={lineIndex}
-            className="overflow-visible text-center"
-            initial="hidden"
-            animate={triggerOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
-            variants={automatixContainerVariants}
-        >
-            <div className="inline-block text-flow-natural">
-                {textLine.split(' ').map((word, wordIndex) => (
-                    <AutomatixWord
-                        key={wordIndex}
-                        word={word}
-                        index={wordIndex}
-                        totalWords={textLine.split(' ').length}
-                        variants={automatixWordVariants}
-                        gradient={gradient}
-                        gradientColors={gradientColors}
-                        delay={delay + lineIndex * 0.2}
-                        blurIntensity={blurIntensity * 0.7}
-                        baseClassName={className}
-                    />
-                ))}
-            </div>
-        </motion.div>
-    );
+    const renderWordRevealEffect = (textLine: string, lineIndex: number) => {
+        // Extract text alignment from className, default to center if none specified
+        const textAlignment = className.includes('text-left') ? 'text-left' :
+            className.includes('text-right') ? 'text-right' :
+                className.includes('text-justify') ? 'text-justify' : 'text-center';
+
+        return (
+            <motion.div
+                key={lineIndex}
+                className={`overflow-visible ${textAlignment}`}
+                initial="hidden"
+                animate={triggerOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
+                variants={automatixContainerVariants}
+            >
+                <div className="inline-block text-flow-natural">
+                    {textLine.split(' ').map((word, wordIndex) => (
+                        <AutomatixWord
+                            key={wordIndex}
+                            word={word}
+                            index={wordIndex}
+                            totalWords={textLine.split(' ').length}
+                            variants={automatixWordVariants}
+                            gradient={gradient}
+                            gradientColors={gradientColors}
+                            delay={delay + lineIndex * 0.2}
+                            blurIntensity={blurIntensity * 0.7}
+                            baseClassName={className}
+                        />
+                    ))}
+                </div>
+            </motion.div>
+        );
+    };
 
     const renderLineRevealEffect = (textLine: string, lineIndex: number) => (
         <motion.div
@@ -268,7 +265,7 @@ export const AutomatixTextReveal: React.FC<AutomatixTextRevealProps> = memo(({
                 animationDelay: `${delay + lineIndex * 0.2}s`
             }}
         >
-            <span className={`${gradient ? `bg-gradient-to-r ${gradientColors.join(' ')} bg-clip-text text-transparent` : ''}`}>
+            <span className={`${className} ${gradient ? `bg-gradient-to-r ${gradientColors.join(' ')} bg-clip-text text-transparent` : ''}`}>
                 {textLine}
             </span>
         </motion.div>
@@ -289,61 +286,34 @@ export const AutomatixTextReveal: React.FC<AutomatixTextRevealProps> = memo(({
         }
     };
 
-    const textSizeClasses = {
-        sm: 'text-sm',
-        md: 'text-base',
-        lg: 'text-lg',
-        xl: 'text-xl',
-        '2xl': 'text-2xl',
-        '3xl': 'text-3xl',
-        '4xl': 'text-4xl',
-        '5xl': 'text-5xl',
-        '6xl': 'text-6xl',
-        '7xl': 'text-7xl',
-        '8xl': 'text-8xl',
-    };
-
-    const fontWeightClasses = {
-        normal: 'font-normal',
-        medium: 'font-medium',
-        semibold: 'font-semibold',
-        bold: 'font-bold',
-        extrabold: 'font-extrabold',
-        black: 'font-black',
-    };
-
     return (
         <div
             ref={ref}
-            className={`${textSizeClasses[size]} ${fontWeightClasses[weight]} text-container-responsive text-break-words ${className}`}
+            className={className}
         >
             {renderEffect()}
         </div>
     );
 });
 
-// Specialized components for different text reveal effects
-export const AutomatixHeroText: React.FC<Omit<AutomatixTextRevealProps, 'size' | 'weight'>> = (props) => {
+// Specialized components for different text reveal effects with their own typography
+export const AutomatixHeroText: React.FC<Omit<AutomatixTextRevealProps, 'className'> & { className?: string }> = ({ className = '', ...props }) => {
     return (
         <AutomatixTextReveal
-            size="7xl"
-            weight="bold"
+            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight ${className}`}
             gradientColors={['from-primary-600', 'to-secondary-600']}
             effect="word-reveal"
-            performance="high"
             triggerOnScroll={true}
             {...props}
         />
     );
 };
 
-export const AutomatixSubtitleText: React.FC<Omit<AutomatixTextRevealProps, 'size' | 'weight'>> = (props) => {
+export const AutomatixSubtitleText: React.FC<Omit<AutomatixTextRevealProps, 'className'> & { className?: string }> = ({ className = '', ...props }) => {
     return (
         <AutomatixTextReveal
-            size="2xl"
-            weight="normal"
+            className={`text-lg sm:text-xl md:text-2xl font-normal leading-relaxed ${className}`}
             effect="word-reveal"
-            performance="medium"
             triggerOnScroll={true}
             {...props}
         />

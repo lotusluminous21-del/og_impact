@@ -7,7 +7,7 @@ import {
     Star,
     Zap as ZapIcon
 } from 'lucide-react';
-import { AutomatixHeroText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 import sarahMitchellImage from '../../assets/sarah-mitchell--marketing-director.png';
 
 const testimonials = [
@@ -85,7 +85,7 @@ export const TestimonialsSection: React.FC = () => {
     const otherTestimonials = testimonials.slice(1);
 
     return (
-        <section id="testimonials" className="py-16 sm:py-20 bg-white dark:bg-black relative overflow-hidden">
+        <section id="testimonials" className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-black relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Testimonials Badge - Identical to WhyUsSection */}
                 <motion.div
@@ -106,19 +106,20 @@ export const TestimonialsSection: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="text-center mb-12 sm:mb-16"
+                    className="text-center mb-8 sm:mb-12 lg:mb-16"
                     transition={{ delay: 0.8, duration: 0.8 }}
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
                         <div>
-                            <AutomatixHeroText
+                            <AutomatixTextReveal
                                 text="Trusted By Businesses Like Yours"
-                                className="text-gray-900 dark:text-white"
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                                 delay={1.0}
                                 stagger={0.08}
                                 duration={0.8}
                                 blurIntensity={6}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
                     </motion.div>
@@ -129,21 +130,21 @@ export const TestimonialsSection: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="mb-8 sm:mb-12"
+                    className="mb-6 sm:mb-8 lg:mb-12"
                     transition={{ delay: 1.4, duration: 0.8 }}
                 >
                     <motion.div
                         variants={itemVariants}
-                        className="flex flex-col lg:flex-row items-start gap-8 sm:gap-12 lg:gap-16"
+                        className="flex flex-col lg:flex-row items-center lg:items-start gap-6 sm:gap-8 lg:gap-16"
                     >
                         {/* Avatar Section - Left side */}
                         <div className="flex justify-center lg:justify-start lg:w-2/5">
                             <div className="relative">
-                                <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden mb-6 sm:mb-8 border-2 border-gray-300 dark:border-neutral-700 shadow-2xl">
+                                <div className="w-48 h-56 sm:w-64 sm:h-72 md:w-72 md:h-80 lg:w-96 lg:h-96 rounded-2xl lg:rounded-3xl overflow-hidden mb-4 sm:mb-6 lg:mb-8 border-2 border-gray-300 dark:border-neutral-700 shadow-2xl">
                                     <img
                                         src={featuredTestimonial.avatar}
                                         alt={`${featuredTestimonial.name} - ${featuredTestimonial.role}`}
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover object-center"
                                     />
                                 </div>
                             </div>
@@ -152,44 +153,101 @@ export const TestimonialsSection: React.FC = () => {
                         {/* Content Section - Right side */}
                         <div className="lg:w-3/5">
                             {/* Company Info with Icon */}
-                            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                                <featuredTestimonial.icon className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
-                                <span className="text-gray-900 dark:text-white font-semibold text-lg sm:text-xl">{featuredTestimonial.company}</span>
+                            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                                <featuredTestimonial.icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-orange-500 flex-shrink-0" />
+                                <span className="text-gray-900 dark:text-white font-semibold text-base sm:text-lg lg:text-xl">{featuredTestimonial.company}</span>
                             </div>
 
                             {/* Quote */}
-                            <blockquote className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-900 dark:text-white leading-relaxed mb-6 sm:mb-8 font-medium">
-                                "{featuredTestimonial.content}"
-                            </blockquote>
+                            <div className="mb-4 sm:mb-6 lg:mb-8">
+                                <AutomatixTextReveal
+                                    text={`"${featuredTestimonial.content}"`}
+                                    className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl text-gray-900 dark:text-white leading-relaxed font-medium text-left"
+                                    delay={0.2}
+                                    stagger={0.02}
+                                    duration={0.8}
+                                    blurIntensity={3}
+                                    effect="word-reveal"
+                                    triggerOnScroll={true}
+                                />
+                            </div>
 
                             {/* Attribution */}
-                            <div className="mb-6 sm:mb-8">
-                                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">
-                                    {featuredTestimonial.name}
-                                </h3>
-                                <p className="text-gray-700 dark:text-neutral-300 text-base sm:text-lg">
-                                    {featuredTestimonial.role}
-                                </p>
+                            <div className="mb-4 sm:mb-6 lg:mb-8">
+                                <div className="mb-1 sm:mb-2">
+                                    <AutomatixTextReveal
+                                        text={featuredTestimonial.name}
+                                        className="text-xl sm:text-2xl lg:text-xl font-bold text-gray-900 dark:text-white leading-tight text-left"
+                                        delay={0.4}
+                                        stagger={0.08}
+                                        duration={0.6}
+                                        blurIntensity={4}
+                                        effect="word-reveal"
+                                        triggerOnScroll={true}
+                                    />
+                                </div>
+                                <AutomatixTextReveal
+                                    text={featuredTestimonial.role}
+                                    className="text-gray-700 dark:text-neutral-300 text-base sm:text-lg lg:text-lg leading-relaxed text-left"
+                                    delay={0.5}
+                                    stagger={0.04}
+                                    duration={0.5}
+                                    blurIntensity={3}
+                                    effect="word-reveal"
+                                    triggerOnScroll={true}
+                                />
                             </div>
 
                             {/* Stats */}
                             {featuredTestimonial.stats && (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
                                     <div>
-                                        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
-                                            {featuredTestimonial.stats.salesIncrease}
+                                        <div className="mb-1 sm:mb-2 lg:mb-3">
+                                            <AutomatixTextReveal
+                                                text={featuredTestimonial.stats.salesIncrease}
+                                                className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
+                                                delay={0.6}
+                                                stagger={0.1}
+                                                duration={0.8}
+                                                blurIntensity={5}
+                                                effect="character-reveal"
+                                                triggerOnScroll={true}
+                                            />
                                         </div>
-                                        <div className="text-gray-700 dark:text-neutral-300 text-sm sm:text-lg">
-                                            Sales increase in first month.
-                                        </div>
+                                        <AutomatixTextReveal
+                                            text="Sales increase in first month."
+                                            className="text-gray-700 dark:text-neutral-300 text-base sm:text-lg lg:text-lg leading-relaxed text-left"
+                                            delay={0.8}
+                                            stagger={0.04}
+                                            duration={0.6}
+                                            blurIntensity={3}
+                                            effect="word-reveal"
+                                            triggerOnScroll={true}
+                                        />
                                     </div>
                                     <div>
-                                        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
-                                            {featuredTestimonial.stats.resolutionTime}
+                                        <div className="mb-1 sm:mb-2 lg:mb-3">
+                                            <AutomatixTextReveal
+                                                text={featuredTestimonial.stats.resolutionTime}
+                                                className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
+                                                delay={0.7}
+                                                stagger={0.1}
+                                                duration={0.8}
+                                                blurIntensity={5}
+                                                effect="character-reveal"
+                                                triggerOnScroll={true}
+                                            />
                                         </div>
-                                        <div className="text-gray-700 dark:text-neutral-300 text-sm sm:text-lg">
-                                            Faster customer resolutions.
-                                        </div>
+                                        <AutomatixTextReveal
+                                            text="Faster customer resolutions."
+                                            className="text-gray-700 dark:text-neutral-300 text-base sm:text-lg lg:text-lg leading-relaxed text-left"
+                                            delay={0.9}
+                                            stagger={0.04}
+                                            duration={0.6}
+                                            blurIntensity={3}
+                                            effect="word-reveal"
+                                            triggerOnScroll={true}
+                                        />
                                     </div>
                                 </div>
                             )}
@@ -202,7 +260,7 @@ export const TestimonialsSection: React.FC = () => {
                     variants={itemVariants}
                     initial="hidden"
                     animate={inView ? 'visible' : 'hidden'}
-                    className="mb-8 sm:mb-16"
+                    className="mb-6 sm:mb-8 lg:mb-16"
                     transition={{ delay: 2.2, duration: 0.8 }}
                 >
                     <div className="w-full h-px bg-gray-300 dark:bg-neutral-700"></div>
@@ -262,18 +320,43 @@ export const TestimonialsSection: React.FC = () => {
                                 </div>
 
                                 {/* Quote */}
-                                <blockquote className="text-gray-600 dark:text-neutral-400 group-hover:text-gray-900 dark:group-hover:text-white text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 transition-colors duration-300">
-                                    "{testimonial.content}"
-                                </blockquote>
+                                <div className="mb-4 sm:mb-6">
+                                    <AutomatixTextReveal
+                                        text={`"${testimonial.content}"`}
+                                        className="text-gray-600 dark:text-neutral-400 group-hover:text-gray-900 dark:group-hover:text-white text-base sm:text-lg leading-relaxed transition-colors duration-300 text-left"
+                                        delay={0.2}
+                                        stagger={0.02}
+                                        duration={0.6}
+                                        blurIntensity={3}
+                                        effect="word-reveal"
+                                        triggerOnScroll={true}
+                                    />
+                                </div>
 
                                 {/* Attribution */}
                                 <div>
-                                    <h4 className="text-gray-900 dark:text-white font-semibold text-base sm:text-lg mb-1">
-                                        {testimonial.name}
-                                    </h4>
-                                    <p className="text-gray-700 dark:text-neutral-300 text-sm sm:text-base">
-                                        {testimonial.role}
-                                    </p>
+                                    <div className="mb-1">
+                                        <AutomatixTextReveal
+                                            text={testimonial.name}
+                                            className="text-gray-900 dark:text-white font-semibold text-base sm:text-lg leading-tight text-left"
+                                            delay={0.4}
+                                            stagger={0.08}
+                                            duration={0.5}
+                                            blurIntensity={4}
+                                            effect="word-reveal"
+                                            triggerOnScroll={true}
+                                        />
+                                    </div>
+                                    <AutomatixTextReveal
+                                        text={testimonial.role}
+                                        className="text-gray-700 dark:text-neutral-300 text-sm sm:text-base leading-relaxed text-left"
+                                        delay={0.5}
+                                        stagger={0.04}
+                                        duration={0.4}
+                                        blurIntensity={3}
+                                        effect="word-reveal"
+                                        triggerOnScroll={true}
+                                    />
                                 </div>
                             </div>
                         </motion.div>

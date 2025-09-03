@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { ServiceCard } from '../ui/ServiceCard';
 import { AutomatixButton } from '../ui/AutomatixButton';
 import { scrollToElement } from '../../utils/scrollUtils';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 
 // Import service images
 import socialMediaImage from '../../assets/a-professional--minimalist-office-desk-at-night--t.png';
@@ -238,25 +238,27 @@ export const ServicesSection: React.FC = () => {
                     transition={{ delay: 0.4, duration: 0.6 }}
                 >
                     <div className="mb-4 sm:mb-6">
-                        <AutomatixHeroText
+                        <AutomatixTextReveal
                             text="Expertise That Drives Quality"
-                            className="text-gray-900 dark:text-white"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                             delay={0.2}
                             stagger={0.04}
                             duration={0.6}
                             blurIntensity={4}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
                     <div>
-                        <AutomatixSubtitleText
+                        <AutomatixTextReveal
                             text="With deep expertise, we deliver quality solutions that drive success and exceed industry standards consistently."
-                            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-neutral-400 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 text-center"
+                            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-neutral-400 leading-relaxed text-center"
                             delay={0.4}
                             stagger={0.02}
                             duration={0.5}
                             blurIntensity={3}
                             effect="word-reveal"
+                            triggerOnScroll={true}
                         />
                     </div>
                 </motion.div>

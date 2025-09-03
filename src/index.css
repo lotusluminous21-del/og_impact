@@ -50,6 +50,17 @@
     @apply bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent;
   }
 
+  /* Fix for gradient text clipping descenders */
+  .hero-title-gradient {
+    line-height: 1.2 !important;
+    padding-bottom: 0.1em;
+    display: inline-block;
+  }
+
+  .hero-title-gradient>* {
+    line-height: inherit !important;
+  }
+
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }

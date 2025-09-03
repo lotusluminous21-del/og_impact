@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { useState } from 'react';
 import { Button } from '../ui/Button';
 import { scrollToElement } from '../../utils/scrollUtils';
-import { AutomatixHeroText, AutomatixSubtitleText } from '../ui/AutomatixTextReveal';
+import { AutomatixTextReveal } from '../ui/AutomatixTextReveal';
 
 const faqs = [
     {
@@ -67,27 +67,29 @@ export const FAQSection = () => {
                 >
                     <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
                         <div>
-                            <AutomatixHeroText
+                            <AutomatixTextReveal
                                 text="Need to Know"
-                                className="text-gray-900 dark:text-white"
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight text-center"
                                 delay={1.0}
                                 stagger={0.08}
                                 duration={0.8}
                                 blurIntensity={6}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
                     </motion.div>
                     <motion.div variants={itemVariants} className="mb-2 sm:mb-4">
                         <div>
-                            <AutomatixSubtitleText
+                            <AutomatixTextReveal
                                 text="Frequently Asked Questions"
-                                className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white text-center"
+                                className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white text-center leading-relaxed"
                                 delay={1.4}
                                 stagger={0.04}
                                 duration={0.7}
                                 blurIntensity={5}
                                 effect="word-reveal"
+                                triggerOnScroll={true}
                             />
                         </div>
                     </motion.div>
